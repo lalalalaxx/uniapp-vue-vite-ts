@@ -9,6 +9,7 @@ export const useUserStore = defineStore({
             counter: 0,
             name: 'Eduardo',
             isAdmin: true,
+            token: 'token'
         }
     },
     getters: {
