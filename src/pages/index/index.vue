@@ -9,7 +9,19 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import {usePagingLoad} from "@/hooks/usePagingLoad"
 const title = ref('Hello')
+function demo() {
+	return new Promise((r,j) => {
+		r({})
+	}) 
+}
+
+let list = usePagingLoad(() => {
+	return demo()
+})
+
+
 
 const goDemo = ()=>{
 	uni.navigateTo({
