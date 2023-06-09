@@ -8,25 +8,39 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import {usePagingLoad} from "@/hooks/usePagingLoad"
+import { ref, watchEffect } from 'vue'
+import { usePagingLoad } from "@/hooks/usePagingLoad"
+import { demo } from "@/apis/demo"
 const title = ref('Hello')
-function demo() {
-	return new Promise((r,j) => {
-		r({})
-	}) 
-}
+const pageNums = ref(1)
+// 通过组合函数获取和声明页面所需要的变量及方法
+const {
+  pageNum,
+  total,
+  pageSize,
+  pages,
+  loading,
+  tableData,
+  loadDataGrid,
+} = usePagingLoad({
+  request: demo, form: {pageNum: pageNums.value}
+});
 
-let list = usePagingLoad(() => {
-	return demo()
-})
+watchEffect(() => {
+  console.log("tableData.value----------watchEffect", tableData.value);
+})  
+
+setTimeout(()=>{
+  console.log(222222222222222284851818);
+  // pageNums.value = 2
+  loadDataGrid()
+}, 5000)
 
 
-
-const goDemo = ()=>{
-	uni.navigateTo({
-		url: "/pages/demo/demo"
-	})
+const goDemo = () => {
+  uni.navigateTo({
+    url: "/pages/demo/demo"
+  })
 }
 
 </script>
