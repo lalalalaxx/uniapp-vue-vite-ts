@@ -4,37 +4,38 @@
     <view class="text-area">
       <text class="title" @click="goDemo">{{ title }}</text>
     </view>
+	<Empty></Empty>
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
-import { usePagingLoad } from "@/hooks/usePagingLoad"
-import { demo } from "@/apis/demo"
+import Empty from '@/components/Empty/Empty.vue'
+// import { usePagingLoad } from "@/hooks/usePagingLoad"
+// import { demo } from "@/apis/demo"
 const title = ref('Hello')
-const pageNums = ref(1)
+// --------------------------------------------------
 // 通过组合函数获取和声明页面所需要的变量及方法
-const {
-  pageNum,
-  total,
-  pageSize,
-  pages,
-  loading,
-  tableData,
-  loadDataGrid,
-} = usePagingLoad({
-  request: demo, form: {pageNum: pageNums.value}
-});
-
-watchEffect(() => {
-  console.log("tableData.value----------watchEffect", tableData.value);
-})  
-
-setTimeout(()=>{
-  console.log(222222222222222284851818);
-  // pageNums.value = 2
-  loadDataGrid()
-}, 5000)
+// const pageNums = ref(1)
+// const {
+//   pageNum,
+//   total,
+//   pageSize,
+//   pages,
+//   loading,
+//   tableData,
+//   loadDataGrid,
+// } = usePagingLoad({
+//   request: demo, form: {pageNum: pageNums.value}
+// });
+// watchEffect(() => {
+//   console.log("tableData.value----------watchEffect", tableData.value);
+// })  
+// setTimeout(()=>{
+//   console.log(222222222222222284851818);
+//   loadDataGrid()
+// }, 5000)
+// --------------------------------------------------
 
 
 const goDemo = () => {
@@ -45,7 +46,7 @@ const goDemo = () => {
 
 </script>
 
-<style>
+<style >
 .content {
   display: flex;
   flex-direction: column;

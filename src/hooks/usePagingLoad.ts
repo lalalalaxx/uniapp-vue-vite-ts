@@ -1,5 +1,5 @@
-import { ref, unref } from "vue";
-
+import { ref, reactive, computed } from 'vue'
+import { onReachBottom } from '@dcloudio/uni-app'
 /**
  * loading状态
  * @param {*} request url请求
@@ -7,85 +7,77 @@ import { ref, unref } from "vue";
  * @returns
  */
 
-interface obj {
-  request: any;
-  form: any;
-}
-export function usePagingLoad(obj: obj) {
-  const { request, form } = obj;
-  //分页
-  const pageNum = ref(1);
-  const total = ref(0); //总页数
-  const pageSize = ref(16); //每页多少条
-  const pages = ref(0);
-  const tableData = ref([]);
+export function usePagingLoad(Query : any) {
+	// 下拉加载
+	onReachBottom(() => {
+		console.log('onReachBottom');
+		loadMore()
+	})
 
-  // 加载状态
-  const loading = ref(true);
-  const code = ref(500);
+	let isLoading = ref(false)
+	const queryParams = reactive({
+		page: 1,
+		limit: 10
+	})
+	let total = ref(0)
+	let list = reactive([])
+	// 无更多数据了
+	const isNoData = computed(() => {
+		if (queryParams.page * queryParams.limit >= total.value) {
+			return true
+		} else {
+			return false
+		}
+	})
+	// 显示暂无数据
+	const isEmpty = computed(() => {
+		if (total.value == 0) {
+			return true
+		} else {
+			return false
+		}
+	})
 
-  // 获取列表数据
-  const getDataGrid = async (params: any) => {
-    loading.value = true;
-    request(params).then(
-        (res: {
-          data: {
-            code: number;
-            data: {
-              total: number;
-              pageNum: number;
-              pageSize: number;
-              pages: number;
-              list: any;
-            };
-            errorMsg?: string;
-          };
-        }) => {
-          code.value = res.data.code;
-          if (res.data && res.data.code === 200) {
-            console.log("200");
-            total.value = res.data.data.total;
-            pageNum.value ++;
-            pageSize.value = res.data.data.pageSize;
-            pages.value = res.data.data.pages;
-            tableData.value = res.data.data.list;
-          } else if (
-            res.data.code === 400 &&
-            res.data.errorMsg === "暂无记录！"
-          ) {
-            total.value = 0; //没有数据时分页页数置为1
-          } else {
-            // ElMessage.error("内部服务器错误：" + res.data.errorMsg);
-            console.log("内部服务器错误");
-          }
-          // 数据设置完后再设置loading为false
-          loading.value = false;
-          console.log('tableData.value1111', tableData.value);
-          
-        }
-      )
-      .catch((error: any) => {
-        console.log(error);
-        loading.value = false;
-        // ElMessage.error("列表数据显示失败");
-        console.log("列表数据显示失败");
-      });
-  };
-  getDataGrid(form);
+	const LoadData = () => {
+		uni.showLoading({
+			title: '加载中...'
+		});
+		isLoading.value = true;
+		Query(queryParams).then((res : any) => {
+			console.log(1111111111, res);
+			// 数据加载完成后 设置 after 钩子
+			total.value = res?.data?.data?.total;
+			afterLoadData && afterLoadData(res.data);
+			list = list.concat(res.data.items);
+		}).catch().finally(() => {
+			uni.hideLoading();
+			uni.stopPullDownRefresh();
+			isLoading.value = false;
+		})
+	}
 
-  function loadDataGrid() {
-    if (form) form.pageNum = pageNum.value;
-    getDataGrid(form);
-    // router.push({ path: router.currentRoute.value.path, query: { pageNum: pageNum.value } });
-  }
+	const afterLoadData = (data : any) => {
+		console.log(data);
+	}
 
-  return {
-    pageNum,
-    total,
-    pageSize,
-    pages,
-    loading,
-    tableData,
-    loadDataGrid,
-  };
+	const ReLoad = () => {
+		isLoading.value = false;
+		list = [];
+		queryParams.page = 1;
+		LoadData();
+	}
+
+	const loadMore = () => {
+		if (isNoData.value || isLoading.value) return; // 无数据或者加载中不进行加载
+		queryParams.page += 1
+		LoadData()
+	}
+
+	return {
+		LoadData,
+		ReLoad,
+		isNoData,
+		isEmpty,
+		isLoading
+	};
 }
