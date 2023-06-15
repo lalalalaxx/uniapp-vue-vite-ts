@@ -1,83 +1,114 @@
-import { ref, reactive, computed } from 'vue'
-import { onReachBottom } from '@dcloudio/uni-app'
+import { ref, reactive, computed, watch } from "vue";
+import { onReachBottom } from "@dcloudio/uni-app";
 /**
  * loading状态
- * @param {*} request url请求
- * @param {*} form 不同页面传入的表单
+ * @param {*} Query 请求函数
+ * @param {*} LoadData 加载数据方法
+ * @param {*} ReLoad (isClear?: boolean) 刷新列表数据 isClear 传入true时将请求参数（queryParams）还原初始化状态
  * @returns
  */
 
-export function usePagingLoad(Query : any) {
-	// 下拉加载
-	onReachBottom(() => {
-		console.log('onReachBottom');
-		loadMore()
-	})
+export function usePagingLoad(Query: any) {
+  // 下拉加载
+  onReachBottom(() => {
+    console.log("onReachBottom");
+    loadMore();
+  });
 
-	let isLoading = ref(false)
-	const queryParams = reactive({
-		page: 1,
-		limit: 10
-	})
-	let total = ref(0)
-	let list = reactive([])
-	// 无更多数据了
-	const isNoData = computed(() => {
-		if (queryParams.page * queryParams.limit >= total.value) {
-			return true
-		} else {
-			return false
-		}
-	})
-	// 显示暂无数据
-	const isEmpty = computed(() => {
-		if (total.value == 0) {
-			return true
-		} else {
-			return false
-		}
-	})
+  let isLoading = ref(false);
+  let queryParams = reactive({} as any);
 
-	const LoadData = () => {
-		uni.showLoading({
-			title: '加载中...'
-		});
-		isLoading.value = true;
-		Query(queryParams).then((res : any) => {
-			console.log(1111111111, res);
-			// 数据加载完成后 设置 after 钩子
-			total.value = res?.data?.data?.total;
-			afterLoadData && afterLoadData(res.data);
-			list = list.concat(res.data.items);
-		}).catch().finally(() => {
-			uni.hideLoading();
-			uni.stopPullDownRefresh();
-			isLoading.value = false;
-		})
-	}
+  queryParams = {
+    page: 1,
+    limit: 10,
+  };
 
-	const afterLoadData = (data : any) => {
-		console.log(data);
-	}
+  let total = ref(0);
 
-	const ReLoad = () => {
-		isLoading.value = false;
-		list = [];
-		queryParams.page = 1;
-		LoadData();
-	}
+  let list = ref([]);
+  // 无更多数据了
+  const isNoData = computed(() => {
+    if (queryParams.page * queryParams.limit >= total.value) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  // 显示暂无数据
+  const isEmpty = computed(() => {
+    if (total.value == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 
-	const loadMore = () => {
-		if (isNoData.value || isLoading.value) return; // 无数据或者加载中不进行加载
-		queryParams.page += 1
-		LoadData()
-	}
+  interface optionInt {
+    key: string;
+    val: any;
+  }
 
-	return {
-		LoadData,
-		ReLoad,
-		isNoData,
-		isEmpty,
-		isLoading
-	};
+  const LoadData = async (afterLoadData?: any, option?: optionInt[]) => {
+    let obj: any = {};
+    console.log("option", option);
+    if (option && option?.length > 0) {
+      option?.map((item) => {
+        obj[item?.key] = item.val;
+      });
+    }
+    // , ...rest: any[]
+    // if (rest.length > 0) {
+    //   rest.map((item) => {
+    //     obj[item?.key] = item?.val;
+    //   });
+    // }
+    queryParams = reactive({ ...queryParams, ...obj });
+    // console.log("------------", queryParams);
+
+    uni.showLoading({
+      title: "加载中...",
+    });
+    isLoading.value = true;
+    const res = await Query(queryParams);
+    total.value = res?.data?.data?.total;
+    // 数据加载完成后 设置 after 钩子
+    afterLoadData && afterLoadData(res.data);
+    list.value = list.value.concat(res?.data?.data?.items);
+    uni.hideLoading();
+    uni.stopPullDownRefresh();
+    isLoading.value = false;
+  };
+
+  //   const afterLoadData = (data: any) => {
+  //     console.log(data);
+  //   };
+
+  const ReLoad = (isClear?: boolean) => {
+    isLoading.value = false;
+    list.value = [];
+    if (isClear) {
+      queryParams = reactive({
+        page: 1,
+        limit: 10,
+      });
+    } else {
+      queryParams.page = 1;
+    }
+    LoadData();
+  };
+
+  const loadMore = () => {
+    if (isNoData.value || isLoading.value) return; // 无数据或者加载中不进行加载
+    queryParams.page += 1;
+    LoadData();
+  };
+
+  return {
+    list,
+    LoadData,
+    ReLoad,
+    isNoData,
+    isEmpty,
+    isLoading,
+  };
 }

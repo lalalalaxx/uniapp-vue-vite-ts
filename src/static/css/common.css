@@ -1,80 +1,48 @@
 /* ----------------------------------- */
 /* -------------单样式----------------- */
 /* ----------------------------------- */
-image{
+image {
 	width: 100%;
 	height: 100%;
 }
-.pd20{
-	padding: 20rpx;
-	box-sizing: border-box;
-}
-.bg{
-	background-color: #f5f5f5;
-}
+
 /* 弹性盒子 */
 .flex {
 	display: flex;
 }
-.fiexDc{
-	flex-direction:column;
+
+.flexDc {
+	flex-direction: column;
 }
-.inFlex {
-	display: inline-flex;
-}
+
 .flex1 {
 	flex: 1;
 }
+
 .flex2 {
 	flex: 2;
 }
+
 .flex3 {
 	flex: 2;
 }
+
 .flex4 {
 	flex: 4;
 }
-.Talign-C {
+
+.text-align-center {
 	text-align: center;
 }
-.flex-basis-auto {
-	flex-basis: auto;
-}
-.flex-basis-content {
-	flex-basis: content;
-}
-.flex-flow-rw {
-	flex-flow: row wrap;
-}
+
 .flex-wrap-nowrap {
 	flex-wrap: nowrap;
 }
+
 .flex-wrap-wrap {
 	flex-wrap: wrap;
 }
-.AC-flex-start {
-	align-content: flex-start;
-}
 
-.AC-flex-end {
-	align-content: flex-end;
-}
-
-.AC-center {
-	align-content: center;
-}
-
-.AC-space-between {
-	align-content: between;
-}
-
-.AC-space-around {
-	align-content: around;
-}
-
-.AC-stretch {
-	align-content: stretch;
-}
 .AI-flex-start {
 	align-items: flex-start;
 }
@@ -87,33 +55,10 @@ image{
 	align-items: center;
 }
 
-.AI-baseline {
-	align-items: baseline;
-}
 .AI-wrap {
 	flex-wrap: wrap;
 }
-.AI-stretch {
-	align-items: stretch;
-}
-.AS-auto {
-	align-self: auto;
-}
-.AS-flex-start {
-	align-self: flex-start;
-}
-.AS-flex-end {
-	align-self: flex-end;
-}
-.AS-center {
-	align-self: center;
-}
-.AS-baseline {
-	align-self: baseline;
-}
-.AS-stretch {
-	align-self: stretch;
-}
+
 .JC-flex-start {
 	justify-content: flex-start;
 }
