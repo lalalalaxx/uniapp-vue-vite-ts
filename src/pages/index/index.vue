@@ -2,46 +2,31 @@
   <view class="content">
     <image class="logo" src="/static/logo.png" />
     <view class="text-area">
-      <text class="title" @click="goDemo">{{ title }}</text>
+      <text class="title" @click="">{{ title }}</text>
     </view>
-	<Empty></Empty>
+    <Empty></Empty>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, inject } from 'vue'
 import Empty from '@/components/Empty/Empty.vue'
-// import { usePagingLoad } from "@/hooks/usePagingLoad"
-// import { demo } from "@/apis/demo"
 const title = ref('Hello')
-// --------------------------------------------------
-// 通过组合函数获取和声明页面所需要的变量及方法
-// const pageNums = ref(1)
-// const {
-//   pageNum,
-//   total,
-//   pageSize,
-//   pages,
-//   loading,
-//   tableData,
-//   loadDataGrid,
-// } = usePagingLoad({
-//   request: demo, form: {pageNum: pageNums.value}
-// });
-// watchEffect(() => {
-//   console.log("tableData.value----------watchEffect", tableData.value);
-// })  
-// setTimeout(()=>{
-//   console.log(222222222222222284851818);
-//   loadDataGrid()
-// }, 5000)
-// --------------------------------------------------
-
+// import { pageIng } from './index'
+// 定义类型
+interface globalInt {
+  // goToPage: (obj) => void
+}
+const global = inject<globalInt>('global')
+// console.log('goDemo', global?.goToPage);
 
 const goDemo = () => {
-  uni.navigateTo({
-    url: "/pages/demo/demo"
-  })
+  // uni.navigateTo({
+  //   url: "/pages/demo/demo"
+  // })
+  // global?.goToPage({
+
+  // })
 }
 
 </script>
