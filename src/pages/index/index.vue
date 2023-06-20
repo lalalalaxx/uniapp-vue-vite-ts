@@ -18,7 +18,8 @@ import type { globalObjInt } from '@/types/global'
 
 const goDemo = () => {
   globalObj?.goToPage({
-    url: '/pages/demo/demo'
+    url: '/pages/demo/demo',
+    mode: 'navigateTo'
   })
 }
 
