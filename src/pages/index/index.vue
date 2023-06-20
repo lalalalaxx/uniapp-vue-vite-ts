@@ -12,22 +12,19 @@
 import { ref, inject } from 'vue'
 import Empty from '@/components/Empty/Empty.vue'
 const title = ref('Hello')
-// import { pageIng } from './index'
-// 定义类型
-interface globalInt {
-  // goToPage: (obj) => void
-}
-const global = inject<globalInt>('global')
-// console.log('goDemo', global?.goToPage);
+import type { globalObjInt } from '@/types/global'
+
+
 
 const goDemo = () => {
-  // uni.navigateTo({
-  //   url: "/pages/demo/demo"
-  // })
-  // global?.goToPage({
-
-  // })
+  globalObj?.goToPage({
+    url: '/pages/demo/demo'
+  })
 }
+
+const globalObj = inject<globalObjInt>('globalObj')
+
+
 
 </script>
 
