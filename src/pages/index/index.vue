@@ -2,7 +2,7 @@
   <view class="content">
     <image class="logo" src="/static/logo.png" />
     <view class="text-area">
-      <text class="title" @click="goDemo">{{ title }}</text>
+      <text class="title" @click="">{{ title }}</text>
     </view>
     <Empty></Empty>
   </view>
@@ -17,9 +17,10 @@ import type { globalObjInt } from '@/types/global'
 
 
 const goDemo = () => {
-    globalObj?.goToPage({
-      url: '/pages/demo/demo'
-    })
+  globalObj?.goToPage({
+    url: '/pages/demo/demo',
+    mode: 'navigateTo'
+  })
 }
 
 const globalObj = inject<globalObjInt>('globalObj')

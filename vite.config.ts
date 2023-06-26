@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv } from "vite";
 import uni from "@dcloudio/vite-plugin-uni";
-
+import Components from 'unplugin-vue-components/vite';
+import { VantResolver } from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
@@ -9,7 +10,12 @@ export default defineConfig((config) => {
 	const { VITE_APP_BASE_URL } = env
 	console.log('VITE_APP_BASE_URL', VITE_APP_BASE_URL);
 	return {
-		plugins: [uni()],
+		plugins: [
+			uni(),
+			Components({
+				resolvers: [VantResolver()],
+			})
+		],
 		css: {
 			preprocessorOptions: {
 				scss: {
@@ -30,9 +36,9 @@ export default defineConfig((config) => {
 						'^/apis': '',
 						/*
 						例子:假如我们请求的完整路径是https://www.xxx.com/public/shoplist
-						  那么按现在这种写法,在请求方法应该写成:get("/api/public/shoplist")
-						  在浏览器查看请求Request URL会显示:http://localhost:8080/api/public/shoplis
-						  因为重写了 '^/api': '' ，http://localhost:8080又指向了https://www.xxx.com，所以实际的请求是:https://www.xxx.com/public/shoplist
+							那么按现在这种写法,在请求方法应该写成:get("/api/public/shoplist")
+							在浏览器查看请求Request URL会显示:http://localhost:8080/api/public/shoplis
+							因为重写了 '^/api': '' ，http://localhost:8080又指向了https://www.xxx.com，所以实际的请求是:https://www.xxx.com/public/shoplist
 						*/
 					}
 				}
