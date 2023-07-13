@@ -50,9 +50,12 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wxf7b12e274ddb9542",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "es6" : true,
+            "postcss" : false,
+            "minified" : true
         },
         "usingComponents" : true
     },
@@ -65,22 +68,22 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
-    "uniStatistics": {  
-        "enable": false
+    "uniStatistics" : {
+        "enable" : false
     },
-	"h5": {
-		"devServer": {
-			"proxy": {
-			  "/apis": {
-			    "target": "http://localhost:8000/",
-			    "changeOrigin": true,
-			    "secure": false
-			    // "pathRewrite": {
-			    //   "^/apis": ""
-			    // }
-			  }
-			}
-		}
-	},
+    "h5" : {
+        "devServer" : {
+            "proxy" : {
+                "/apis" : {
+                    "target" : "http://localhost:8000/",
+                    "changeOrigin" : true,
+                    "secure" : false
+                }
+            }
+        }
+    },
+    // "pathRewrite": {
+    //   "^/apis": ""
+    // }
     "vueVersion" : "3"
 }

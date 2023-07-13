@@ -104,41 +104,36 @@
 		z-index: 9999;
 		top: 0;
 		left: 0;
-
+	
 		.header {
 			padding: 0 16rpx;
 			box-sizing: border-box;
-
+	
 			.header_left {
 				width: 20%;
-
+	
 				.icon {
 					width: 48rpx;
 				}
-
+	
 				.left_txt {
-					font-size: $font-size-22;
-					line-height: $font-size-22;
+					font-size: 22rpx;
+					line-height: 22rpx;
 				}
 			}
-
+	
 			.header_center {
 				width: 60%;
 				text-align: center;
-				/*溢出隐藏*/
 				overflow: hidden;
-				/*显示省略号*/
 				text-overflow: ellipsis;
-				/*不换行*/
 				white-space: nowrap;
-				font-size: $font-size-24;
-				// background-color: $fontSize; // 测试使用
+				font-size: 24rpx;
 			}
-
 			.header_right {
 				width: 20%;
 			}
-
+	
 		}
 	}
 </style>

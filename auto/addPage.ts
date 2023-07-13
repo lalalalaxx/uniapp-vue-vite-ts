@@ -23,16 +23,21 @@ const subPages = pagesJson.subPackages.flatMap((i) => {
 	});
 });
 // 当前已有页面
-const pages = [...Pages, ...subPages];
+// const pages = [...Pages, ...subPages];
 // 当前已创建文件
 const filesList = fs.readdirSync('./src/pages');
+const filesSubList = fs.readdirSync('./src/subpackage/pages');
+
 // 获取需要新增的页面  =>取差集
-const newPages = pages.filter((i) => !filesList.includes(i.name));
+let newPages = Pages.filter((i) => !filesList.includes(i.name));
+const newSubPages = subPages.filter((i) => !filesSubList.includes(i.name));
+
+newPages = [...newPages, ...newSubPages]
+
 // 添加新路由
 function addPages(pages) {
-
-	console.log(pages);
 	for (const page of pages) {
+		// 待修改根据path 路径生成
 		const { name, title, type } = page;
 		let dirPath = ''
 		switch (type) {
@@ -51,14 +56,17 @@ function addPages(pages) {
 		const filePath = `${dirPath}/${name}.vue`;
 		const createStream = fs.createWriteStream(filePath);
 
-		const template = `<template>
-  <view>${title}</view>
+		const template = 
+`<script setup lang="ts">
+	import HeaderXcx from '@/components/Header/HeaderXcx.vue'
+</script>
+<template>
+	<view class="">
+	<HeaderXcx :leftTxt="'标题'" :textColor="'#fff'" :goBack="false"></HeaderXcx>
+	${title}
+	</view>
 </template>
-
-<script setup lang="ts" ></script>
-
-<style scoped></style>
-`;
+<style lang="scss" scoped></style>`;
 		createStream.write(template);
 		createStream.end();
 		console.log('\x1B[34m', `pages ${name} created successfully.`);
