@@ -7,43 +7,43 @@ import type { goToPageInt, imgUrlInt } from "@/types/globals";
  * @params params 参数
  * @author lx
  * */
-export const goToPage = (option : goToPageInt) => {
-	let urls = option.url;
-	// 判断option
-	if (option.hasOwnProperty("params") && option.params) {
-		urls += "?";
-		for (let key in option.params) {
-			urls += key + "=" + option.params[key] + "&";
-		}
-		urls = urls.substring(0, urls.length - 1);
-	}
+export const goToPage = (option: goToPageInt) => {
+  let urls = option.url;
+  // 判断option
+  if (option.hasOwnProperty("params") && option.params) {
+    urls += "?";
+    for (let key in option.params) {
+      urls += key + "=" + option.params[key] + "&";
+    }
+    urls = urls.substring(0, urls.length - 1);
+  }
 
-	if (!option.hasOwnProperty("mode")) {
-		option.mode = "navigateTo";
-	}
-	// console.log("urls", urls);
-	switch (option.mode) {
-		case "navigateTo":
-			uni.navigateTo({
-				url: urls,
-			});
-			break;
-		case "redirectTo":
-			uni.redirectTo({
-				url: urls,
-			});
-			break;
-		case "reLaunch":
-			uni.reLaunch({
-				url: urls,
-			});
-			break;
-		case "switchTab":
-			uni.switchTab({
-				url: urls,
-			});
-			break;
-	}
+  if (!option.hasOwnProperty("mode")) {
+    option.mode = "navigateTo";
+  }
+  // console.log("urls", urls);
+  switch (option.mode) {
+    case "navigateTo":
+      uni.navigateTo({
+        url: urls,
+      });
+      break;
+    case "redirectTo":
+      uni.redirectTo({
+        url: urls,
+      });
+      break;
+    case "reLaunch":
+      uni.reLaunch({
+        url: urls,
+      });
+      break;
+    case "switchTab":
+      uni.switchTab({
+        url: urls,
+      });
+      break;
+  }
 };
 
 /**
@@ -55,8 +55,8 @@ export const goToPage = (option : goToPageInt) => {
  * @example imgUrl({str: 'demo'})
  * */
 
-export const imgUrl = (obj : imgUrlInt) => {
-	return `/static/${obj.path ?? "imgs"}/${obj.str}.${obj.suffix ?? "png"}`;
+export const imgUrl = (obj: imgUrlInt) => {
+  return `/static/${obj.path ?? "imgs"}/${obj.str}.${obj.suffix ?? "png"}`;
 };
 
 /**
@@ -66,57 +66,56 @@ export const imgUrl = (obj : imgUrlInt) => {
  * @author lx
  * @example formatterDate('1689415188')
  * */
-export const formatterDate = (date : number, format : string = "YYYY-MM-DD") => {
-	let formatterDate = "";
-	if (String(date).length == 10) {
-		date = date * 1000;
-	}
-	let dates = new Date(Number(date));
-	const year = dates.getFullYear();
-	const month = String(dates.getMonth() + 1).padStart(2, "0");
-	const day = String(dates.getDate()).padStart(2, "0");
-	const hours = String(dates.getHours()).padStart(2, "0");
-	const minutes = String(dates.getMinutes()).padStart(2, "0");
-	const seconds = String(dates.getSeconds()).padStart(2, "0");
-	formatterDate = `${year}-${month}-${day}`;
-	if (format == "YYYY-MM-DD hh:mm:ss") {
-		formatterDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-	}
-	return formatterDate;
+export const formatterDate = (date: number, format: string = "YYYY-MM-DD") => {
+  let formatterDate = "";
+  if (String(date).length == 10) {
+    date = date * 1000;
+  }
+  let dates = new Date(Number(date));
+  const year = dates.getFullYear();
+  const month = String(dates.getMonth() + 1).padStart(2, "0");
+  const day = String(dates.getDate()).padStart(2, "0");
+  const hours = String(dates.getHours()).padStart(2, "0");
+  const minutes = String(dates.getMinutes()).padStart(2, "0");
+  const seconds = String(dates.getSeconds()).padStart(2, "0");
+  formatterDate = `${year}-${month}-${day}`;
+  if (format == "YYYY-MM-DD hh:mm:ss") {
+    formatterDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+  return formatterDate;
 };
-
 
 /**
  * 防抖
- * @param fun 
- * @param wait 
+ * @param fun
+ * @param wait
  */
-export function debounce(fun : Function, wait : number = 1000) {
-	let timer : any;
-	return function () {
-		if (timer) {
-			clearTimeout(timer);
-		}
-		timer = setTimeout(() => {
-			fun();
-			timer = null;
-		}, wait);
-	};
+export function debounce(fun: Function, wait: number = 1000) {
+  let timer: any;
+  return function () {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      fun();
+      timer = null;
+    }, wait);
+  };
 }
 
 /**
  * 节流
- * @param fun 
- * @param wait 
+ * @param fun
+ * @param wait
  */
-export function throttle(fun : Function, wait : number = 1000) {
-	let timers : any;
-	return function () {
-		if (!timers) {
-			timers = setTimeout(() => {
-				fun();
-				timers = null;
-			}, wait);
-		}
-	};
+export function throttle(fun: Function, wait: number = 1000) {
+  let timers: any;
+  return function () {
+    if (!timers) {
+      timers = setTimeout(() => {
+        fun();
+        timers = null;
+      }, wait);
+    }
+  };
 }
