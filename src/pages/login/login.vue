@@ -1,0 +1,173 @@
+<script setup lang="ts">
+import HeaderXcx from '@/components/Header/HeaderXcx.vue'
+import { ref } from 'vue';
+import { onReady } from '@dcloudio/uni-app'
+import type { userInfoInt } from '@/apis/login/type'
+import { login } from '@/apis/login'
+import useUserStore from '@/store/user'
+import { goToPage } from '@/utils/Main'
+// vuex数据相关
+let userStore = useUserStore()
+// 表单数据
+const userInfo = ref<userInfoInt>({
+    username: '',
+    password: ''
+})
+// 规则
+const rules = {
+    'username': {
+        type: 'string',
+        required: true,
+        message: '请输入账号',
+        trigger: ['blur', 'change']
+    },
+    'password': {
+        type: 'string',
+        required: true,
+        message: '请输入密码',
+        trigger: ['blur', 'change']
+    },
+}
+// 密码输入框的类型切换
+let inputType = ref<number>(1)
+const clickChangeInput = (type: number) => {
+    if (inputType.value != type) {
+        inputType.value = type
+    }
+}
+
+// 表单
+const uForms = ref()
+// 提交表单
+const submit = () => {
+    console.log('uForm', uForms);
+    uForms.value.validate().then(() => {
+        // uni.$u.toast('校验通过')
+        login(userInfo.value).then((loginRes: any) => {
+
+            userStore.setUserInfo(loginRes.data)
+            uni.showToast({
+                title: '登录成功',
+                icon: "none",
+                success: () => {
+                    setTimeout(() => {
+                        goToPage({
+                            url: '/pages/index/index',
+                            mode: "redirectTo"
+                        })
+                    }, 2000)
+                }
+            })
+
+        })
+
+    }).catch((errors: any) => {
+        console.log("errors", errors);
+        // uni.$u.toast('校验失败')
+    })
+}
+// 生命周期等-------------------------------------------
+onReady(() => {
+    uForms.value.setRules(rules)
+})
+</script>
+<template>
+    <view class="login">
+        <image class="login_bg" src="@/static/imgs/login_bg.png" mode="aspectFill"></image>
+        <HeaderXcx :leftTxt="'登录'" :textColor="'#fff'" :goBack="false"></HeaderXcx>
+        <view class="login_main flex JC-center flexDc">
+            <view class="login_mian_title">内蒙古天择安全技术培训有限公司</view>
+            <view class="login_mian_sub_title">
+                业务数据提示系统
+            </view>
+            <!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
+            <u-form :model="userInfo" label-width="10" :rules="rules" ref="uForms">
+                <u-form-item class="form_item" prop="username" ref="item1">
+                    <u-input placeholderStyle="color: #ffffff" color="#ffffff" v-model="userInfo.username" border="none"
+                        placeholder="请输入账号"></u-input>
+                </u-form-item>
+                <u-form-item class="form_item" prop="password" ref="item1">
+                    <u-input placeholderStyle="color: #ffffff" color="#ffffff" v-model="userInfo.password" border="none"
+                        :type="inputType == 1 ? 'password' : 'text'" placeholder="请输入密码">
+                        <template #suffix>
+                            <u-icon name="eye-fill" v-if="inputType == 2" color="#fff" size="18"
+                                @click="clickChangeInput(1)"></u-icon>
+                            <u-icon name="eye-off" v-else color="#fff" size="18" @click="clickChangeInput(2)"></u-icon>
+                        </template>
+                    </u-input>
+                </u-form-item>
+            </u-form>
+            <view class="submit_btn" @click="submit">
+                <!-- :customStyle="{ 'fontSize': '18px' }" -->
+                <u-button shape="circle" iconColor="#fff" text="登录"></u-button>
+            </view>
+        </view>
+    </view>
+</template>
+
+<style scoped lang="scss">
+.login {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+
+    .login_bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .login_main {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+        width: 100%;
+        padding: 0 64rpx;
+        box-sizing: border-box;
+
+        .login_mian_title {
+            font-size: $font-size-40;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .login_mian_sub_title {
+            font-size: 60rpx;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            margin: 20rpx 0 140rpx;
+        }
+
+        :deep(.u-form-item__body__right) {
+            border-radius: 100rpx;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10rpx);
+            padding: 14rpx 20rpx;
+        }
+
+        :deep(.u-button__text) {
+            background-image: -webkit-linear-gradient(360deg, #0065F2, #00A2E8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        :deep(.u-form-item__body__right__message) {
+            font-weight: 600;
+            font-size: 26rpx;
+        }
+
+
+        .submit_btn {
+            margin-top: 110rpx;
+            // :deep(.button__text){
+            // 	font-size: 16px;
+            // }
+        }
+    }
+}
+</style>

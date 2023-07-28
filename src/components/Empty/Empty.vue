@@ -35,7 +35,8 @@
 
 <style lang="scss" scoped>
 	.empty {
-		width: 100%;
+		width: 100vw;
+		padding: 24rpx 0;
 		.txt {
 			font-size: 26rpx;
 			color: #666;
