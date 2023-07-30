@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import HeaderXcx from '@/components/Header/HeaderXcx.vue'
+import Header from '@/components/Header/Header.vue'
 import { ref } from 'vue';
 import { onReady } from '@dcloudio/uni-app'
 import type { userInfoInt } from '@/apis/login/type'
-import { login } from '@/apis/login'
 import useUserStore from '@/store/user'
-import { goToPage } from '@/utils/Main'
 // vuex数据相关
 let userStore = useUserStore()
 // 表单数据
 const userInfo = ref<userInfoInt>({
-    username: '',
-    password: ''
+    username: 'admin',
+    password: 'admin'
 })
 // 规则
 const rules = {
@@ -43,24 +41,7 @@ const submit = () => {
     console.log('uForm', uForms);
     uForms.value.validate().then(() => {
         // uni.$u.toast('校验通过')
-        login(userInfo.value).then((loginRes: any) => {
-
-            userStore.setUserInfo(loginRes.data)
-            uni.showToast({
-                title: '登录成功',
-                icon: "none",
-                success: () => {
-                    setTimeout(() => {
-                        goToPage({
-                            url: '/pages/index/index',
-                            mode: "redirectTo"
-                        })
-                    }, 2000)
-                }
-            })
-
-        })
-
+        userStore.login(userInfo.value)
     }).catch((errors: any) => {
         console.log("errors", errors);
         // uni.$u.toast('校验失败')
@@ -74,9 +55,9 @@ onReady(() => {
 <template>
     <view class="login">
         <image class="login_bg" src="@/static/imgs/login_bg.png" mode="aspectFill"></image>
-        <HeaderXcx :leftTxt="'登录'" :textColor="'#fff'" :goBack="false"></HeaderXcx>
+        <Header :title="'登录'" :leftIconShow="false" :texFontSize="36" :textColor="'#fff'" :goBack="false"></Header>
         <view class="login_main flex JC-center flexDc">
-            <view class="login_mian_title">内蒙古天择安全技术培训有限公司</view>
+            <view class="login_mian_title">标题一</view>
             <view class="login_mian_sub_title">
                 业务数据提示系统
             </view>

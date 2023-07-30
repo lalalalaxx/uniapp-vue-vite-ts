@@ -6,6 +6,15 @@
     },
     "pages": [
         {
+            "name": "login",
+            "path": "pages/login/login",
+            "style": {
+                "navigationBarTitleText": "login",
+                "enablePullDownRefresh": false,
+                "navigationStyle": "custom"
+            }
+        },
+        {
             "name": "index",
             "path": "pages/index/index",
             "style": {
@@ -19,15 +28,6 @@
             "path": "pages/listDemo/listDemo",
             "style": {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-                "navigationStyle": "custom"
-            }
-        },
-        {
-            "name": "login",
-            "path": "pages/login/login",
-            "style": {
-                "navigationBarTitleText": "login",
                 "enablePullDownRefresh": false,
                 "navigationStyle": "custom"
             }

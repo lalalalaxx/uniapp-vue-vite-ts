@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import HeaderXcx from "@/components/Header/HeaderXcx.vue";
+import Header from "@/components/Header/Header.vue";
 import { reactive } from "vue"
 </script>
 <template>
     <view class="index">
-        <HeaderXcx :leftTxt="'首页'" :textColor="'#000'" :goBack="false"></HeaderXcx>
+        <Header :title="'首页'" :isShowShadow="true" :textColor="'#000'" :textAlign="'center'" :goBack="false"></Header>
         首页
     </view>
 </template>
