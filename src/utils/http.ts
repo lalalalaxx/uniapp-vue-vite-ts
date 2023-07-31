@@ -17,7 +17,7 @@ const requestObj = {
             }
             that.isLock = true;
             url = import.meta.env.VITE_APP_BASE_PRE + url;
-            console.log('url: ' + url);
+            // console.log('url: ' + url);
 
             let header = {
                 "content-type": "application/json",
@@ -27,14 +27,12 @@ const requestObj = {
                 header["Authorization"] = "Bearer" + userStore.token;
             }
             // console.log("url", import.meta.env, url);
-			console.log('urlsss');
             uni.request({
                 url,
                 header,
                 data,
                 method: isPost ? "POST" : "GET",
                 success(res) {
-					console.log('success');
                     let data = res.data as Response;
                     if (res.statusCode == 200) {
                         console.log("data", data);
@@ -59,12 +57,12 @@ const requestObj = {
                     }
                 },
                 fail(err) {
-					console.log('fail', err);
+                    console.log('fail', err);
                     uni.showToast({ title: "网络错误", icon: "none" });
                     reject({ message: "网络错误" });
                 },
                 complete() {
-					console.log('complete');
+                    console.log('complete');
                     that.isLock = false;
                 },
             });

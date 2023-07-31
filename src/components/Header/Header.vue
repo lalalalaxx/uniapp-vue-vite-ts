@@ -4,65 +4,46 @@
  * @fileName: Header.vue
  * @params
  * @author: lxx
- * @date: 2023-07-17 09:32:09
- * @version: V1.0.0
+ * @date: 2023-07-16 09:32:09
+ * @version: V1.0.2
  */
-import { ref, watchEffect } from 'vue'
+import { goToPage } from "@/utils/Main";
+import { ref, watchEffect } from "vue";
 
-const props = defineProps({
+interface headerInt {
     // 头部高度 默认为44px （微信小程序不可用）
-    headerHeight: {
-        type: Number,
-        default: 44,
-    },
+    headerHeight: number;
     // 是否显示左侧内容
-    leftIconShow: {
-        type: Boolean,
-        default: true,
-    },
+    leftIconShow: boolean;
     // 样式部分
-    backgroundColor: {
-        type: String,
-        // default: "linear-gradient(90deg, rgba(10, 207, 254, 1) 0%, rgba(74, 92, 255, 1) 100%)",
-        default: "transparent",
-    },
-    backgroundColor2: {
-        type: String,
-        default: "transparent",
-    },
-    textColor: {
-        type: String,
-        default: "#fff",
-    },
-    textFontSize: {
-        type: Number,
-        default: 30
-    },
-    title: {
-        type: String,
-        default: "标题",
-    },
-    textAlign: {
-        type: String,
-        default: 'left'
-    },
+    backgroundColor: string;
+    backgroundColor2: string;
+    textColor: string;
+    textFontSize: number;
+    title: string;
     // 是否需要生成和头部高度相同的盒子
-    isShowHeaderBox: {
-        type: Boolean,
-        default: true,
-    },
-    positionState: {
-        type: String,
-        default: "fixed",
-    },
-    isShowShadow: {
-        type: Boolean,
-        default: false
-    },
-    isBackIcon: {
-        type: Boolean,
-        default: true
-    }
+    isShowHeaderBox: boolean;
+    positionState: string;
+    isShowShadow: boolean;
+    isBlackIcon: boolean;
+}
+
+const props = withDefaults(defineProps<headerInt>(), {
+    // 头部高度 默认为44px （微信小程序不可用）
+    headerHeight: 44,
+    // 是否显示左侧内容
+    leftIconShow: true,
+    // 样式部分
+    backgroundColor: "linear-gradient(90deg, rgba(10, 207, 254, 1) 0%, rgba(74, 92, 255, 1) 100%)",
+    backgroundColor2: "transparent",
+    textColor: "#fff",
+    textFontSize: 34,
+    title: "标题",
+    // 是否需要生成和头部高度相同的盒子
+    isShowHeaderBox: true,
+    positionState: "fixed",
+    isShowShadow: false,
+    isBlackIcon: false
 });
 
 let { statusBarHeight } = uni.getSystemInfoSync();
@@ -70,32 +51,31 @@ let { statusBarHeight } = uni.getSystemInfoSync();
 // 胶囊状态
 let menuButton = uni.getMenuButtonBoundingClientRect();
 // 微信头部宽度
-let wxHeaderWidth = menuButton.left
+let wxHeaderWidth = menuButton.left;
 // 上边距
 statusBarHeight = menuButton.top;
 // #endif
 
-const headerHeightRef = ref(0)
+// 设置header的高度
+const headerHeightRef = ref(0);
 watchEffect(() => {
-    headerHeightRef.value = props.headerHeight
+    headerHeightRef.value = props.headerHeight;
     // #ifdef MP-WEIXIN
     // 中间高度
     headerHeightRef.value = menuButton.height;
     // #endif
-})
-
-
-
-
+});
 
 // 返回上一页(如没有页面返回首页)
 const goBack = () => {
-    uni.navigateBack();
-};
-const goHome = () => {
-    uni.reLaunch({
-        url: "/pages/index/index",
-    });
+    if (getCurrentPages().length <= 1) {
+        goToPage({
+            url: "/pages/index/index",
+            mode: "redirectTo",
+        });
+    } else {
+        uni.navigateBack();
+    }
 };
 </script>
 
@@ -114,9 +94,10 @@ const goHome = () => {
                 <view class="header_left flex AI-center JC-space-between">
                     <view class="icon flex AI-center" @click="goBack" v-if="leftIconShow">
                         <!-- <image src="../../static/pubImgs/backW.png" mode="widthFix"></image> -->
-                        <image :src="isBackIcon
+                        <image :src="isBlackIcon
                             ? '../../static/pubImgs/back.png'
-                            : '../../static/pubImgs/backW.png'" mode="widthFix"></image>
+                            : '../../static/pubImgs/backW.png'
+                            " mode="widthFix"></image>
                     </view>
                     <view class="left_slot">
                         <slot name="left"></slot>
@@ -126,9 +107,7 @@ const goHome = () => {
                     <view class="title" :style="{ fontSize: textFontSize + 'rpx' }">
                         {{ title }}
                     </view>
-                    <view class="title">
-                        <slot name="center"></slot>
-                    </view>
+                    <slot name="center"></slot>
                 </view>
                 <view class="header_right flex AI-center JC-center">
                     <slot name="right"></slot>
@@ -138,9 +117,9 @@ const goHome = () => {
             <!-- 左右结构 -->
             <!-- #ifdef MP-WEIXIN -->
             <view class="wx_header flex AI-center" :style="{ height: headerHeightRef + 'px', width: wxHeaderWidth + 'px' }">
-                <view class="wx_header_left  flex AI-center">
+                <view class="wx_header_left flex AI-center">
                     <view class="icon flex AI-center" @click="goBack" v-if="leftIconShow">
-                        <image :src="isBackIcon
+                        <image :src="isBlackIcon
                             ? '../../static/pubImgs/back.png'
                             : '../../static/pubImgs/backW.png'
                             " mode="widthFix"></image>
@@ -153,13 +132,10 @@ const goHome = () => {
                     <view class="title" :style="{ fontSize: textFontSize + 'rpx' }">
                         {{ title }}
                     </view>
-                    <!-- <view class="title"> -->
                     <slot name="center"></slot>
-                    <!-- </view> -->
                 </view>
             </view>
             <!-- #endif -->
-
         </view>
         <!-- 填充头部防止塌陷 -->
         <view class="status_bar" :style="{ height: statusBarHeight + 'px' }"></view>
@@ -214,7 +190,6 @@ const goHome = () => {
     }
 
     .wx_header {
-
         .wx_header_left {
             height: 100%;
 

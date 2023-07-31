@@ -9,6 +9,7 @@
 */
 import { LoadData } from '@/hooks/useListLoadClass'
 import { ref } from 'vue'
+import { debounce } from '@/utils/Main'
 
 type listPropsInt = {
     api: Function,
@@ -16,10 +17,9 @@ type listPropsInt = {
 }
 
 const props = withDefaults(defineProps<listPropsInt>(), {})
-const emit = defineEmits(['afterLoad'])
 
-const inputTxt = ref('789')
-let { list, isLoading, ReLoad, isEmpty, isNoData } = LoadData({
+const inputTxt = ref('')
+let { list, isLoading, isEmpty, isNoData, ReLoad } = LoadData({
     api: props.api,
     afterLoadData: props.afterLoadData,
     options: {
@@ -27,21 +27,24 @@ let { list, isLoading, ReLoad, isEmpty, isNoData } = LoadData({
         des: false
     }
 })
-console.log("list", list);
 
-function inputChange() {
-    console.log("123456789");
+const inputChange = debounce(() => {
+    console.log('input change');
     ReLoad(false)
-}
-
-
+})
 
 </script>
 <template>
-    <input type="text" v-model="inputTxt" @change="inputChange">
+    <view class="search_box">
+        <u-search placeholder="请输入搜索内容" v-model="inputTxt" @change="inputChange" :show-action="false"></u-search>
+    </view>
     <view v-for="(item, index) in list" :key="index">
         <slot v-bind:item="item" v-bind:index="index"></slot>
     </view>
     <ListState :isEmpty="isEmpty" :isLoading="isLoading" :isNoData="isNoData"></ListState>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.search_box {
+    padding: 10rpx 20rpx;
+}
+</style>

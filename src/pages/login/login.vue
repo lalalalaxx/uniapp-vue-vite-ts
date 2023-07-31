@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { onReady } from '@dcloudio/uni-app'
 import type { userInfoInt } from '@/apis/login/type'
 import useUserStore from '@/store/user'
+import { debounce } from '@/utils/Main'
 // vuex数据相关
 let userStore = useUserStore()
 // 表单数据
@@ -37,7 +38,7 @@ const clickChangeInput = (type: number) => {
 // 表单
 const uForms = ref()
 // 提交表单
-const submit = () => {
+const submit = debounce(() => {
     console.log('uForm', uForms);
     uForms.value.validate().then(() => {
         // uni.$u.toast('校验通过')
@@ -46,7 +47,7 @@ const submit = () => {
         console.log("errors", errors);
         // uni.$u.toast('校验失败')
     })
-}
+})
 // 生命周期等-------------------------------------------
 onReady(() => {
     uForms.value.setRules(rules)
@@ -55,13 +56,12 @@ onReady(() => {
 <template>
     <view class="login">
         <image class="login_bg" src="@/static/imgs/login_bg.png" mode="aspectFill"></image>
-        <Header :title="'登录'" :leftIconShow="false" :texFontSize="36" :textColor="'#fff'" :goBack="false"></Header>
+        <Header :title="'登录'" :leftIconShow="false" :backgroundColor="'transparent'" :goBack="false"></Header>
         <view class="login_main flex JC-center flexDc">
             <view class="login_mian_title">标题一</view>
             <view class="login_mian_sub_title">
                 业务数据提示系统
             </view>
-            <!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
             <u-form :model="userInfo" label-width="10" :rules="rules" ref="uForms">
                 <u-form-item class="form_item" prop="username" ref="item1">
                     <u-input placeholderStyle="color: #ffffff" color="#ffffff" v-model="userInfo.username" border="none"
