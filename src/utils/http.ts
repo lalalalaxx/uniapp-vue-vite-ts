@@ -17,7 +17,6 @@ const requestObj = {
             }
             that.isLock = true;
             url = import.meta.env.VITE_APP_BASE_PRE + url;
-            // console.log('url: ' + url);
 
             let header = {
                 "content-type": "application/json",

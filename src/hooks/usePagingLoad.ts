@@ -1,12 +1,16 @@
 import { ref, reactive, computed, watch } from "vue";
 import { onReachBottom } from "@dcloudio/uni-app";
-/**
+/* 
+ * @description: 分页请求
+ * @fileName: useListLoadClass.ts 
+ * @author: lxx
+ * @date: 2023-07-08 08:55:52
+ * @version: V1.0.0 
  * loading状态
  * @param {*} Query 请求函数
  * @param {*} LoadData 加载数据方法
  * @param {*} ReLoad (isClear?: boolean) 刷新列表数据 isClear 传入true时将请求参数（queryParams）还原初始化状态
- * @returns
- */
+*/
 
 export function usePagingLoad(Query: any) {
     // 下拉加载

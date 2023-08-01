@@ -10,22 +10,22 @@
 import { goToPage } from "@/utils/Main";
 import { ref, watchEffect } from "vue";
 
-interface headerInt {
+type headerInt = {
     // 头部高度 默认为44px （微信小程序不可用）
-    headerHeight: number;
+    headerHeight?: number;
     // 是否显示左侧内容
-    leftIconShow: boolean;
+    leftIconShow?: boolean;
     // 样式部分
-    backgroundColor: string;
-    backgroundColor2: string;
-    textColor: string;
-    textFontSize: number;
+    backgroundColor?: string;
+    backgroundColor2?: string;
+    textColor?: string;
+    textFontSize?: number;
     title: string;
     // 是否需要生成和头部高度相同的盒子
-    isShowHeaderBox: boolean;
-    positionState: string;
-    isShowShadow: boolean;
-    isBlackIcon: boolean;
+    isShowHeaderBox?: boolean;
+    positionState?: string;
+    isShowShadow?: boolean;
+    isBlackIcon?: boolean;
 }
 
 const props = withDefaults(defineProps<headerInt>(), {

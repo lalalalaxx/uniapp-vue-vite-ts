@@ -13,19 +13,28 @@ import { debounce } from '@/utils/Main'
 
 type listPropsInt = {
     api: Function,
-    afterLoadData?: Function
+    afterLoadData?: Function,
+    isNeedSearch?: boolean,
+    options?: any
 }
 
-const props = withDefaults(defineProps<listPropsInt>(), {})
+const props = withDefaults(defineProps<listPropsInt>(), {
+    api: () => { },
+    isNeedSearch: true,
+    options: () => { }
+})
 
 const inputTxt = ref('')
+let options = props.options
+if (props.isNeedSearch) {
+    let obj = { search: inputTxt.value }
+    options = { ...obj, ...options }
+}
+
 let { list, isLoading, isEmpty, isNoData, ReLoad } = LoadData({
     api: props.api,
     afterLoadData: props.afterLoadData,
-    options: {
-        search: inputTxt.value,
-        des: false
-    }
+    options: options
 })
 
 const inputChange = debounce(() => {
@@ -35,7 +44,7 @@ const inputChange = debounce(() => {
 
 </script>
 <template>
-    <view class="search_box">
+    <view class="search_box" v-if="isNeedSearch">
         <u-search placeholder="请输入搜索内容" v-model="inputTxt" @change="inputChange" :show-action="false"></u-search>
     </view>
     <view v-for="(item, index) in list" :key="index">

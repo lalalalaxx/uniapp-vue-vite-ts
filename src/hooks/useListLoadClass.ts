@@ -1,3 +1,10 @@
+/* 
+ * @description: 分页请求
+ * @fileName: useListLoadClass.ts 
+ * @author: lxx
+ * @date: 2023-07-08 08:55:52
+ * @version: V1.0.0 
+*/
 import { ref, computed } from "vue";
 import { onReachBottom } from "@dcloudio/uni-app";
 
@@ -55,7 +62,7 @@ class LoadDataClass {
         let res = await this.Query(LoadDataClass.queryParams);
         this.afterLoadData && this.afterLoadData(res);
         this.total.value = res.data.total;
-        this.list.value = this.list.value.concat(res.data);
+        this.list.value = this.list.value.concat(res.data.data);
 
         uni.hideLoading();
         uni.stopPullDownRefresh();

@@ -1,7 +1,7 @@
 {
-    "name" : "v3_lxx_template",
+    "name" : "v3_uni_template_lxx",
     "appid" : "__UNI__1EEB032",
-    "description" : "模版",
+    "description" : "v3+ts+uniapp模版",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
@@ -16,9 +16,9 @@
             "autoclose" : true,
             "delay" : 0
         },
-		"compatible" : {
-			"ignoreVersion": true
-		},
+        "compatible" : {
+            "ignoreVersion" : true
+        },
         /* 模块配置 */
         "modules" : {},
         /* 应用发布信息 */

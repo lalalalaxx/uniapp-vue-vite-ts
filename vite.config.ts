@@ -7,6 +7,8 @@ import path from "path";
 export default defineConfig((config) => {
     let { mode } = config;
     const env = loadEnv(mode, process.cwd());
+    console.log('xxxx', env.VITE_APP_BASE_PRE);
+
     const { VITE_APP_BASE_URL, VITE_APP_BASE_PRE } = env;
     console.log("VITE_APP_BASE_URL", VITE_APP_BASE_URL, VITE_APP_BASE_PRE);
     return {
@@ -35,12 +37,13 @@ export default defineConfig((config) => {
             // port: 3000,
             proxy: {
                 [VITE_APP_BASE_PRE]: {
-                    target: 'http://localhost:3000/',
+                    target: VITE_APP_BASE_URL,
                     ws: true,
                     changeOrigin: true,
                     // 要记得加rewrite这句
-                    rewrite: (path) => path.replace(/^\/apis/, ''),
-                    // rewrite: (path) => path.replace(aa, ''),
+                    // rewrite: (path) => path.replace(/^\/apis/, ''),
+                    rewrite: (path) =>
+                        path.replace(new RegExp("^" + VITE_APP_BASE_PRE), "")
                 },
             },
         },
