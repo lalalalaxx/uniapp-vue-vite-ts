@@ -1,5 +1,5 @@
 // 登录数据
 export interface userInfoInt {
-  username: string;
-  password: string;
+    username: string
+    password: string
 }

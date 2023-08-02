@@ -7,25 +7,25 @@
  * @date: 2023-07-16 09:32:09
  * @version: V1.0.2
  */
-import { goToPage } from "@/utils/Main";
-import { ref, watchEffect } from "vue";
+import { goToPage } from '@/utils/Main'
+import { ref, watchEffect } from 'vue'
 
 type headerInt = {
     // 头部高度 默认为44px （微信小程序不可用）
-    headerHeight?: number;
+    headerHeight?: number
     // 是否显示左侧内容
-    leftIconShow?: boolean;
+    leftIconShow?: boolean
     // 样式部分
-    backgroundColor?: string;
-    backgroundColor2?: string;
-    textColor?: string;
-    textFontSize?: number;
-    title: string;
+    backgroundColor?: string
+    backgroundColor2?: string
+    textColor?: string
+    textFontSize?: number
+    title: string
     // 是否需要生成和头部高度相同的盒子
-    isShowHeaderBox?: boolean;
-    positionState?: string;
-    isShowShadow?: boolean;
-    isBlackIcon?: boolean;
+    isShowHeaderBox?: boolean
+    positionState?: string
+    isShowShadow?: boolean
+    isBlackIcon?: boolean
 }
 
 const props = withDefaults(defineProps<headerInt>(), {
@@ -34,59 +34,62 @@ const props = withDefaults(defineProps<headerInt>(), {
     // 是否显示左侧内容
     leftIconShow: true,
     // 样式部分
-    backgroundColor: "linear-gradient(90deg, rgba(10, 207, 254, 1) 0%, rgba(74, 92, 255, 1) 100%)",
-    backgroundColor2: "transparent",
-    textColor: "#fff",
+    backgroundColor: 'linear-gradient(90deg, rgba(10, 207, 254, 1) 0%, rgba(74, 92, 255, 1) 100%)',
+    backgroundColor2: 'transparent',
+    textColor: '#fff',
     textFontSize: 34,
-    title: "标题",
+    title: '标题',
     // 是否需要生成和头部高度相同的盒子
     isShowHeaderBox: true,
-    positionState: "fixed",
+    positionState: 'fixed',
     isShowShadow: false,
-    isBlackIcon: false
-});
+    isBlackIcon: false,
+})
 
-let { statusBarHeight } = uni.getSystemInfoSync();
+let { statusBarHeight } = uni.getSystemInfoSync()
 // #ifdef MP-WEIXIN
 // 胶囊状态
-let menuButton = uni.getMenuButtonBoundingClientRect();
+let menuButton = uni.getMenuButtonBoundingClientRect()
 // 微信头部宽度
-let wxHeaderWidth = menuButton.left;
+let wxHeaderWidth = menuButton.left
 // 上边距
-statusBarHeight = menuButton.top;
+statusBarHeight = menuButton.top
 // #endif
 
 // 设置header的高度
-const headerHeightRef = ref(0);
+const headerHeightRef = ref(0)
 watchEffect(() => {
-    headerHeightRef.value = props.headerHeight;
+    headerHeightRef.value = props.headerHeight
     // #ifdef MP-WEIXIN
     // 中间高度
-    headerHeightRef.value = menuButton.height;
+    headerHeightRef.value = menuButton.height
     // #endif
-});
+})
 
 // 返回上一页(如没有页面返回首页)
 const goBack = () => {
     if (getCurrentPages().length <= 1) {
         goToPage({
-            url: "/pages/index/index",
-            mode: "redirectTo",
-        });
+            url: '/pages/index/index',
+            mode: 'redirectTo',
+        })
     } else {
-        uni.navigateBack();
+        uni.navigateBack()
     }
-};
+}
 </script>
 
 <template>
     <view class="header">
-        <view class="header_main" :style="{
-            boxShadow: isShowShadow ? '0 0 8rpx -3rpx #333' : '0 0 0 0 #333',
-            background: backgroundColor,
-            color: textColor,
-            position: positionState,
-        }">
+        <view
+            class="header_main"
+            :style="{
+                boxShadow: isShowShadow ? '0 0 8rpx -3rpx #333' : '0 0 0 0 #333',
+                background: backgroundColor,
+                color: textColor,
+                position: positionState,
+            }"
+        >
             <view class="status_bar" :style="{ height: statusBarHeight + 'px' }"></view>
             <!-- 标准的左中右结构 -->
             <!-- #ifndef MP-WEIXIN -->
@@ -94,10 +97,7 @@ const goBack = () => {
                 <view class="header_left flex AI-center JC-space-between">
                     <view class="icon flex AI-center" @click="goBack" v-if="leftIconShow">
                         <!-- <image src="../../static/pubImgs/backW.png" mode="widthFix"></image> -->
-                        <image :src="isBlackIcon
-                            ? '../../static/pubImgs/back.png'
-                            : '../../static/pubImgs/backW.png'
-                            " mode="widthFix"></image>
+                        <image :src="isBlackIcon ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'" mode="widthFix"></image>
                     </view>
                     <view class="left_slot">
                         <slot name="left"></slot>
@@ -119,10 +119,7 @@ const goBack = () => {
             <view class="wx_header flex AI-center" :style="{ height: headerHeightRef + 'px', width: wxHeaderWidth + 'px' }">
                 <view class="wx_header_left flex AI-center">
                     <view class="icon flex AI-center" @click="goBack" v-if="leftIconShow">
-                        <image :src="isBlackIcon
-                            ? '../../static/pubImgs/back.png'
-                            : '../../static/pubImgs/backW.png'
-                            " mode="widthFix"></image>
+                        <image :src="isBlackIcon ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'" mode="widthFix"></image>
                     </view>
                     <view>
                         <slot name="left"></slot>

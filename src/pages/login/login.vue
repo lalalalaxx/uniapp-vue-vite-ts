@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Header from '@/components/Header/Header.vue'
-import { ref } from 'vue';
+import { ref } from 'vue'
 import { onReady } from '@dcloudio/uni-app'
 import type { userInfoInt } from '@/apis/login/type'
 import useUserStore from '@/store/user'
@@ -10,21 +10,21 @@ let userStore = useUserStore()
 // 表单数据
 const userInfo = ref<userInfoInt>({
     username: 'admin',
-    password: 'admin'
+    password: 'admin',
 })
 // 规则
 const rules = {
-    'username': {
+    username: {
         type: 'string',
         required: true,
         message: '请输入账号',
-        trigger: ['blur', 'change']
+        trigger: ['blur', 'change'],
     },
-    'password': {
+    password: {
         type: 'string',
         required: true,
         message: '请输入密码',
-        trigger: ['blur', 'change']
+        trigger: ['blur', 'change'],
     },
 }
 // 密码输入框的类型切换
@@ -39,14 +39,17 @@ const clickChangeInput = (type: number) => {
 const uForms = ref()
 // 提交表单
 const submit = debounce(() => {
-    console.log('uForm', uForms);
-    uForms.value.validate().then(() => {
-        // uni.$u.toast('校验通过')
-        userStore.login(userInfo.value)
-    }).catch((errors: any) => {
-        console.log("errors", errors);
-        // uni.$u.toast('校验失败')
-    })
+    console.log('uForm', uForms)
+    uForms.value
+        .validate()
+        .then(() => {
+            // uni.$u.toast('校验通过')
+            userStore.login(userInfo.value)
+        })
+        .catch((errors: any) => {
+            console.log('errors', errors)
+            // uni.$u.toast('校验失败')
+        })
 })
 // 生命周期等-------------------------------------------
 onReady(() => {
@@ -59,20 +62,28 @@ onReady(() => {
         <Header :title="'登录'" :leftIconShow="false" :backgroundColor="'transparent'" :goBack="false"></Header>
         <view class="login_main flex JC-center flexDc">
             <view class="login_mian_title">标题一</view>
-            <view class="login_mian_sub_title">
-                业务数据提示系统
-            </view>
+            <view class="login_mian_sub_title">业务数据提示系统</view>
             <u-form :model="userInfo" label-width="10" :rules="rules" ref="uForms">
                 <u-form-item class="form_item" prop="username" ref="item1">
-                    <u-input placeholderStyle="color: #ffffff" color="#ffffff" v-model="userInfo.username" border="none"
-                        placeholder="请输入账号"></u-input>
+                    <u-input
+                        placeholderStyle="color: #ffffff"
+                        color="#ffffff"
+                        v-model="userInfo.username"
+                        border="none"
+                        placeholder="请输入账号"
+                    ></u-input>
                 </u-form-item>
                 <u-form-item class="form_item" prop="password" ref="item1">
-                    <u-input placeholderStyle="color: #ffffff" color="#ffffff" v-model="userInfo.password" border="none"
-                        :type="inputType == 1 ? 'password' : 'text'" placeholder="请输入密码">
+                    <u-input
+                        placeholderStyle="color: #ffffff"
+                        color="#ffffff"
+                        v-model="userInfo.password"
+                        border="none"
+                        :type="inputType == 1 ? 'password' : 'text'"
+                        placeholder="请输入密码"
+                    >
                         <template #suffix>
-                            <u-icon name="eye-fill" v-if="inputType == 2" color="#fff" size="18"
-                                @click="clickChangeInput(1)"></u-icon>
+                            <u-icon name="eye-fill" v-if="inputType == 2" color="#fff" size="18" @click="clickChangeInput(1)"></u-icon>
                             <u-icon name="eye-off" v-else color="#fff" size="18" @click="clickChangeInput(2)"></u-icon>
                         </template>
                     </u-input>
@@ -132,7 +143,7 @@ onReady(() => {
         }
 
         :deep(.u-button__text) {
-            background-image: -webkit-linear-gradient(360deg, #0065F2, #00A2E8);
+            background-image: -webkit-linear-gradient(360deg, #0065f2, #00a2e8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -141,7 +152,6 @@ onReady(() => {
             font-weight: 600;
             font-size: 26rpx;
         }
-
 
         .submit_btn {
             margin-top: 110rpx;

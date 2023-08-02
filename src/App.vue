@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
+import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
 // import type { globalObjInt } from '@/types/globals'
 // import { provide } from 'vue'
 // import { goToPage } from "@/utils/Main"
 onLaunch(() => {
-    console.log("App Launch");
-});
+    console.log('App Launch')
+})
 onShow(() => {
-    console.log("App Show");
-});
+    console.log('App Show')
+})
 onHide(() => {
-    console.log("App Hide");
-});
+    console.log('App Hide')
+})
 // 全局变量
 // provide('globalObj', <globalObjInt>{
 // 	// 公用跳转方法
@@ -19,9 +19,9 @@ onHide(() => {
 // });
 // // 引入静态资源
 </script>
- 
+
 <style lang="scss">
 /* 注意要写在第一行，同时给style标签加入lang="scss"属性 */
-@import "uview-plus/index.scss";
+@import 'uview-plus/index.scss';
 // @import "./static/css/common.scss";
 </style>

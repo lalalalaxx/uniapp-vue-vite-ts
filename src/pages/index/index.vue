@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Header from "@/components/Header/Header.vue";
+import Header from '@/components/Header/Header.vue'
 import useUserStore from '@/store/user'
 const userStore = useUserStore()
 
 const logout = () => {
-    userStore.logOut();
-}   
+    userStore.logOut()
+}
 </script>
 <template>
     <view class="index">

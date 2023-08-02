@@ -1,47 +1,47 @@
 <script setup lang="ts">
-/* 
+/*
  * @description: 分页组件
  * @fileName: List.vue
  * @params  api : 数据请求的apiFunction
  * @author: lxx
  * @date: 2023-07-28 11:36:23"
- * @version: V1.0.0 
-*/
+ * @version: V1.0.0
+ */
 import { LoadData } from '@/hooks/useListLoadClass'
 import { ref } from 'vue'
 import { debounce } from '@/utils/Main'
+import { toRefs } from 'vue'
 
 type listPropsInt = {
-    api: Function,
-    afterLoadData?: Function,
-    isNeedSearch?: boolean,
+    api: Function
+    afterLoadData?: Function
+    isNeedSearch?: boolean
     options?: any
 }
 
 const props = withDefaults(defineProps<listPropsInt>(), {
-    api: () => { },
+    api: () => {},
     isNeedSearch: true,
-    options: () => { }
+    options: () => {},
 })
 
 const inputTxt = ref('')
-let options = props.options
+let { options, api, afterLoadData } = toRefs(props)
 if (props.isNeedSearch) {
     let obj = { search: inputTxt.value }
-    options = { ...obj, ...options }
+    options.value = { ...obj, ...options }
 }
 
 let { list, isLoading, isEmpty, isNoData, ReLoad } = LoadData({
-    api: props.api,
-    afterLoadData: props.afterLoadData,
-    options: options
+    api: api.value,
+    afterLoadData: afterLoadData?.value,
+    options: options.value,
 })
 
 const inputChange = debounce(() => {
-    console.log('input change');
+    console.log('input change')
     ReLoad(false)
 })
-
 </script>
 <template>
     <view class="search_box" v-if="isNeedSearch">

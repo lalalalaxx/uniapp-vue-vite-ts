@@ -1,29 +1,27 @@
 <script lang="ts" setup>
 /*
-* @description: 小程序头部
-* @fileName: HeaderXcx.vue
-* @params
-* @author: lxx
-* @date: 2023-07-17 09:32:45
-* @version: V1.0.0
-*/
-import { ref, onMounted } from "vue";
+ * @description: 小程序头部
+ * @fileName: HeaderXcx.vue
+ * @params
+ * @author: lxx
+ * @date: 2023-07-17 09:32:45
+ * @version: V1.0.0
+ */
+import { ref, onMounted } from 'vue'
 // 顶部菜单高度
-let menuHeight = ref<number>(44);
+let menuHeight = ref<number>(44)
 // 空白占位高度
-let placeHeight = ref<number>(0);
+let placeHeight = ref<number>(0)
 // 上边距
-let paddingTop = ref<number>(0);
+let paddingTop = ref<number>(0)
 // 下边距
-let paddingBot = ref<number>(0);
-// 总高
-let allHeight = ref<number>(0);
+let paddingBot = ref<number>(0)
 
-const props = defineProps({
+defineProps({
     // 状态栏文字颜色
     statusColor: {
         type: String,
-        default: "black",
+        default: 'black',
     },
     // 是否固定
     fixed: {
@@ -33,11 +31,11 @@ const props = defineProps({
     // 背景色
     backGround: {
         type: String,
-        default: "transparent",
+        default: 'transparent',
     },
     textColor: {
         type: String,
-        default: "#000",
+        default: '#000',
     },
     goBack: {
         type: Boolean,
@@ -45,11 +43,11 @@ const props = defineProps({
     },
     centerText: {
         type: String,
-        default: "",
+        default: '',
     },
     leftTxt: {
         type: String,
-        default: "",
+        default: '',
     },
     // 白色返回按钮
     isWhiteBack: {
@@ -61,7 +59,7 @@ const props = defineProps({
         type: Boolean,
         default: true,
     },
-});
+})
 
 // 获取状态栏高度
 const getStatusHeight = () => {
@@ -69,47 +67,50 @@ const getStatusHeight = () => {
         success: function (res: any) {
             // #ifdef MP-WEIXIN
             // 胶囊状态
-            let menuButton = uni.getMenuButtonBoundingClientRect();
+            let menuButton = uni.getMenuButtonBoundingClientRect()
             // 中间高度
-            menuHeight.value = menuButton.height;
+            menuHeight.value = menuButton.height
             // 空白占位高度
-            placeHeight.value =
-                menuButton.top +
-                (menuButton.top - res?.statusBarHeight) +
-                menuButton.height;
+            placeHeight.value = menuButton.top + (menuButton.top - res?.statusBarHeight) + menuButton.height
             // 上边距
-            paddingTop.value = menuButton.top;
-            paddingBot.value = menuButton.top - res?.statusBarHeight;
+            paddingTop.value = menuButton.top
+            paddingBot.value = menuButton.top - res?.statusBarHeight
             // #endif
         },
-    });
-};
+    })
+}
 
 // 左边返回
 const leftTap = () => {
-    uni.navigateBack();
-};
+    uni.navigateBack()
+}
 onMounted(() => {
-    getStatusHeight();
-});
+    getStatusHeight()
+})
 </script>
 <template>
     <view class="headers" :class="{ box_shadow: isBoxShadow }">
         <!-- 头部内容 -->
-        <view class="headers_box" :class="{ top_fixed: fixed }" :style="{
-            color: textColor,
-            height: menuHeight + 'px',
-            paddingTop: paddingTop + 'px',
-            paddingBottom: paddingBot + 'px',
-            background: backGround,
-        }">
+        <view
+            class="headers_box"
+            :class="{ top_fixed: fixed }"
+            :style="{
+                color: textColor,
+                height: menuHeight + 'px',
+                paddingTop: paddingTop + 'px',
+                paddingBottom: paddingBot + 'px',
+                background: backGround,
+            }"
+        >
             <view class="action">
                 <view class="flex AI-center">
-                    <image :src="isWhiteBack
-                            ? '../../static/pubImgs/back.png'
-                            : '../../static/pubImgs/backW.png'
-                        " mode="" class="goback" v-if="goBack" @tap="leftTap">
-                    </image>
+                    <image
+                        :src="isWhiteBack ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'"
+                        mode=""
+                        class="goback"
+                        v-if="goBack"
+                        @tap="leftTap"
+                    ></image>
                     <view class="left_txt overT">
                         {{ leftTxt }}
                     </view>
@@ -121,7 +122,7 @@ onMounted(() => {
             </view>
         </view>
         <!-- 占位 -->
-        <view class="place" :style="{ height: placeHeight }" v-if="fixed"> </view>
+        <view class="place" :style="{ height: placeHeight }" v-if="fixed"></view>
     </view>
 </template>
 
