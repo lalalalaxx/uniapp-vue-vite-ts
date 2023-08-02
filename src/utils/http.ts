@@ -33,12 +33,12 @@ const requestObj = {
                 method: isPost ? 'POST' : 'GET',
                 success(res) {
                     const data = res.data as Response
-                    if (res.statusCode == 200) {
+                    if (res.statusCode === 200) {
                         console.log('data', data)
-                        if (data.code == 200) {
+                        if (data.code === 200) {
                             // 成功
                             resolve(res.data)
-                        } else if (data.code == 1005) {
+                        } else if (data.code === 1005) {
                             uni.showToast({ title: data.msg, icon: 'none' })
                             setTimeout(() => {
                                 goToPage({

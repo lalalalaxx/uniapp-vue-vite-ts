@@ -40,7 +40,7 @@ export function usePagingLoad(Query: any) {
     })
     // 显示暂无数据
     const isEmpty = computed(() => {
-        if (total.value == 0) {
+        if (total.value === 0) {
             return true
         } else {
             return false

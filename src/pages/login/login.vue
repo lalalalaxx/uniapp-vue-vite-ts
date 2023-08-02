@@ -30,7 +30,7 @@ const rules = {
 // 密码输入框的类型切换
 let inputType = ref<number>(1)
 const clickChangeInput = (type: number) => {
-    if (inputType.value != type) {
+    if (inputType.value !== type) {
         inputType.value = type
     }
 }

@@ -33,7 +33,7 @@ class LoadDataClass {
     })
     // 显示暂无数据
     isEmpty = computed(() => {
-        if (this.total.value == 0) {
+        if (this.total.value === 0) {
             return true
         } else {
             return false

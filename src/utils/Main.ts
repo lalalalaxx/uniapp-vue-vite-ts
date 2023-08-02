@@ -7,6 +7,7 @@ import type { goToPageInt, imgUrlInt } from '@/types/globals'
  * @params params 参数
  * @author lx
  * */
+
 export const goToPage = (option: goToPageInt) => {
     let urls = option.url
     // 判断option
@@ -68,7 +69,7 @@ export const imgUrl = (obj: imgUrlInt) => {
  * */
 export const formatterDate = (date: number, format: string = 'YYYY-MM-DD') => {
     let formatterDate = ''
-    if (String(date).length == 10) {
+    if (String(date).length === 10) {
         date = date * 1000
     }
     const dates = new Date(Number(date))
@@ -79,7 +80,7 @@ export const formatterDate = (date: number, format: string = 'YYYY-MM-DD') => {
     const minutes = String(dates.getMinutes()).padStart(2, '0')
     const seconds = String(dates.getSeconds()).padStart(2, '0')
     formatterDate = `${year}-${month}-${day}`
-    if (format == 'YYYY-MM-DD hh:mm:ss') {
+    if (format === 'YYYY-MM-DD hh:mm:ss') {
         formatterDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
     }
     return formatterDate
