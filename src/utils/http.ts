@@ -9,13 +9,13 @@ interface Response {
 const requestObj = {
     isLock: false,
     http({ url = '', data = {}, isPost = true, isSinglePost = false }) {
-        const that = this
+        const _this = this
         const userStore = useUserStore()
         return new Promise(function (resolve, reject) {
-            if (isSinglePost && that.isLock) {
+            if (isSinglePost && _this.isLock) {
                 reject({ message: '加载中' })
             }
-            that.isLock = true
+            _this.isLock = true
             url = import.meta.env.VITE_APP_BASE_PRE + url
 
             const header = {
@@ -62,7 +62,7 @@ const requestObj = {
                 },
                 complete() {
                     console.log('complete')
-                    that.isLock = false
+                    _this.isLock = false
                 },
             })
         })

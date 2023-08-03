@@ -43,7 +43,8 @@
         "lint": "eslint --ext .ts,.js,.vue ./src",
         "fix": "eslint --fix --ext .ts,.js,.vue ./src",
         "eslint:fix": "npm run format && eslint src --fix",
-        "format": "prettier -w src/**/*.{ts,vue}"
+        "format": "prettier -w src/**/*.{ts,vue}",
+        "prepare": "husky install"
     },
     "dependencies": {
         "@dcloudio/uni-app": "3.0.0-alpha-3070720230316001",
@@ -82,6 +83,7 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-prettier": "^5.0.0",
         "eslint-plugin-vue": "^9.16.1",
+        "husky": "^8.0.0",
         "prettier": "^3.0.0",
         "sass-loader": "^10.4.1",
         "typescript": "^4.9.4",
