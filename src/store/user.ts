@@ -19,7 +19,7 @@ const useUserStore = defineStore('user', () => {
         user: uni.getStorageSync(`${Prefix}user`) ? JSON.parse(uni.getStorageSync(`${Prefix}user`)) : {},
     })
     const token = computed(() => {
-        return userInfo.token
+        return userInfo.token || 'token'
     })
     const user = computed(() => {
         return userInfo.user

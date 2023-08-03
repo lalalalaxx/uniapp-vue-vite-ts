@@ -1,10 +1,10 @@
 import { createPinia } from 'pinia'
 // 引入持久化插件
-// import piniaPluginPersist from "pinia-plugin-persist";
+// import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 const store = createPinia()
 // 使用该插件
-// store.use(piniaPluginPersist);
+// store.use(piniaPluginPersistedstate)
 
 //导出
 export default store
