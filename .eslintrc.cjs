@@ -38,7 +38,7 @@ module.exports = {
     rules: {
         // eslint（https://eslint.bootcss.com/docs/rules/）
         complexity: ['error', 15],
-        eqeqeq: 'off', //必须使用全等
+        eqeqeq: 'error', //必须使用全等
         indent: ['error', 4, { SwitchCase: 1 }],
         'valid-jsdoc': 0, //jsdoc规则
         'no-const-assign': 2, //禁止修改const声明的变量 - 开启

@@ -52,21 +52,16 @@ const submit = debounce(() => {
         })
 })
 // 生命周期等-------------------------------------------
-onReady(
-    () => {
-
+onReady(() => {
     uForms.value.setRules(rules)
-}
-)
+})
 </script>
 <template>
     <view class="login">
         <image class="login_bg" src="@/static/imgs/login_bg.png" mode="aspectFill"></image>
         <Header :title="'登录'" :leftIconShow="false" :backgroundColor="'transparent'" :goBack="false"></Header>
         <view class="login_main flex JC-center flexDc">
-            <view class="login_mian_title"> 
-                标题一
-            </view>
+            <view class="login_mian_title">标题一</view>
             <view class="login_mian_sub_title">业务数据提示系统</view>
             <u-form :model="userInfo" label-width="10" :rules="rules" ref="uForms">
                 <u-form-item class="form_item" prop="username" ref="item1">
