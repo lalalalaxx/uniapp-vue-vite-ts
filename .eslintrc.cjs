@@ -51,7 +51,6 @@ module.exports = {
         'vue/script-setup-uses-vars': 2, // 防止<script setup>使用的变量<template>被标记为未使用
         'vue/no-mutating-props': 0, // 不允许组件 prop的改变
         'vue/no-v-html': 0, // 禁止使用 v-html
-        // start
         'vue/no-setup-props-destructure': 0, // 禁止 props 解构传递给 setup
         'vue/no-v-model-argument': 0, // 不允许添加要在 v-model 自定义组件中使用的参数
         'vue/component-definition-name-casing': [2, 'PascalCase'], // 强制使用组件定义名称的特定大小写 PascalCase | kebab-case
