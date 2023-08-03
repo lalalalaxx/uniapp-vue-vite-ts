@@ -84,6 +84,7 @@ module.exports = {
                 trailingComma: 'es5',
                 useTabs: false,
                 vueIndentScriptAndStyle: false,
+                endOfLine: 'auto', // 禁用掉结尾提示
             },
         ],
     },
