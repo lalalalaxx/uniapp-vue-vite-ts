@@ -59,14 +59,14 @@ onReady(() => {
 <template>
     <view class="login">
         <image class="login_bg" src="@/static/imgs/login_bg.png" mode="aspectFill"></image>
-        <Header :title="'登录'" :leftIconShow="false" :backgroundColor="'transparent'" :goBack="false"></Header>
+        <Header :title="'登录'" :left-icon-show="false" :background-color="'transparent'" :go-back="false"></Header>
         <view class="login_main flex JC-center flexDc">
             <view class="login_mian_title">标题一</view>
             <view class="login_mian_sub_title">业务数据提示系统</view>
             <u-form :model="userInfo" label-width="10" :rules="rules" ref="uForms">
                 <u-form-item class="form_item" prop="username" ref="item1">
                     <u-input
-                        placeholderStyle="color: #ffffff"
+                        placeholder-style="color: #ffffff"
                         color="#ffffff"
                         v-model="userInfo.username"
                         border="none"
@@ -75,7 +75,7 @@ onReady(() => {
                 </u-form-item>
                 <u-form-item class="form_item" prop="password" ref="item1">
                     <u-input
-                        placeholderStyle="color: #ffffff"
+                        placeholder-style="color: #ffffff"
                         color="#ffffff"
                         v-model="userInfo.password"
                         border="none"
@@ -91,7 +91,7 @@ onReady(() => {
             </u-form>
             <view class="submit_btn" @click="submit">
                 <!-- :customStyle="{ 'fontSize': '18px' }" -->
-                <u-button shape="circle" iconColor="#fff" text="登录"></u-button>
+                <u-button shape="circle" icon-color="#fff" text="登录"></u-button>
             </view>
         </view>
     </view>

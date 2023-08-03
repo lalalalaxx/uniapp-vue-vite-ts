@@ -14,7 +14,7 @@ const afterLoadData = (data: any) => {
 <template>
     <view>
         <Header :title="'列表测试页面'"></Header>
-        <List :api="demo" :afterLoadData="afterLoadData">
+        <List :api="demo" :after-load-data="afterLoadData">
             <template v-slot="{ item, index }">{{ index }} ---- {{ item }}</template>
         </List>
     </view>

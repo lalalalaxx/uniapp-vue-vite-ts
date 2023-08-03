@@ -9,7 +9,7 @@ const logout = () => {
 </script>
 <template>
     <view class="index">
-        <Header :title="'首页'" :leftIconShow="false"></Header>
+        <Header :title="'首页'" :left-icon-show="false"></Header>
         首页
         <button @click="logout">退出</button>
     </view>

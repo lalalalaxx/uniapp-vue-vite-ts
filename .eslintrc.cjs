@@ -26,7 +26,7 @@ module.exports = {
         {
             files: ['*.ts', '*.tsx', '*.vue'],
             rules: {
-                'no-undef': 'off',
+                'no-undef': 0,
             },
         },
     ],
@@ -36,35 +36,38 @@ module.exports = {
      * 'error' 或 2  ==>  规则作为一个错误（代码不能执行，界面报错）
      */
     rules: {
-        // eslint（https://eslint.bootcss.com/docs/rules/）
-        complexity: ['error', 15],
-        eqeqeq: 'error', //必须使用全等
-        indent: ['error', 4, { SwitchCase: 1 }],
-        'valid-jsdoc': 0, //jsdoc规则
-        'no-const-assign': 2, //禁止修改const声明的变量 - 开启
-        'no-var': 'error', // 要求使用 let 或 const 而不是 var
-        'no-multiple-empty-lines': ['warn', { max: 1 }], // 不允许多个空行
-        'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-        'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-        'no-unexpected-multiline': 'error', // 禁止空余的多行
-        'no-useless-escape': 'off', // 禁止不必要的转义字符
-        '@typescript-eslint/ban-types': 'off', // 允许使用function 声明函数
         // typeScript (https://typescript-eslint.io/rules)
-        '@typescript-eslint/no-unused-vars': 'error', // 禁止定义未使用的变量
-        '@typescript-eslint/prefer-ts-expect-error': 'error', // 禁止使用 @ts-ignore
-        '@typescript-eslint/no-explicit-any': 'off', // 禁止使用 any 类型
-        '@typescript-eslint/no-non-null-assertion': 'off',
-        '@typescript-eslint/no-namespace': 'off', // 禁止使用自定义 TypeScript 模块和命名空间。
-        '@typescript-eslint/semi': 'off',
-        'no-prototype-builtins': 'off', // 可以使用obj.hasOwnProperty()
-        '@typescript-eslint/no-var-requires': 'off', // 不允许在import 中使用require
-
+        '@typescript-eslint/no-unused-vars': 2, // 禁止定义未使用的变量
+        '@typescript-eslint/prefer-ts-expect-error': 2, // 禁止使用 @ts-ignore
+        '@typescript-eslint/no-explicit-any': 0, // 禁止使用 any 类型
+        '@typescript-eslint/no-non-null-assertion': 0,
+        '@typescript-eslint/no-namespace': 0, // 禁止使用自定义 TypeScript 模块和命名空间。
+        '@typescript-eslint/semi': 0,
+        'no-prototype-builtins': 0, // 可以使用obj.hasOwnProperty()
+        '@typescript-eslint/no-var-requires': 0, // 不允许在import 中使用require
+        '@typescript-eslint/no-empty-function': 2, // 关闭空方法检查
         // eslint-plugin-vue (https://eslint.vuejs.org/rules/)
-        'vue/multi-word-component-names': 'off', // 要求组件名称始终为 “-” 链接的单词
-        'vue/script-setup-uses-vars': 'error', // 防止<script setup>使用的变量<template>被标记为未使用
-        'vue/no-mutating-props': 'off', // 不允许组件 prop的改变
-        'vue/attribute-hyphenation': 'off', // 对模板中的自定义组件强制执行属性命名样式
-        'vue/no-v-html': 'off', // 禁止使用 v-html
+        'vue/multi-word-component-names': 0, // 要求组件名称始终为 “-” 链接的单词
+        'vue/script-setup-uses-vars': 2, // 防止<script setup>使用的变量<template>被标记为未使用
+        'vue/no-mutating-props': 0, // 不允许组件 prop的改变
+        'vue/no-v-html': 0, // 禁止使用 v-html
+        // start
+        'vue/no-setup-props-destructure': 0, // 禁止 props 解构传递给 setup
+        'vue/no-v-model-argument': 0, // 不允许添加要在 v-model 自定义组件中使用的参数
+        'vue/component-definition-name-casing': [2, 'PascalCase'], // 强制使用组件定义名称的特定大小写 PascalCase | kebab-case
+        'vue/attribute-hyphenation': [2, 'always', { ignore: [] }], // 对模板中的自定义组件强制实施属性命名样式
+        'vue/no-dupe-keys': [2, { groups: [] }], // 不允许重复字段名称
+        'vue/no-dupe-v-else-if': 2, // 不允许 / v-else-if 链中的 v-if 重复条件
+        'vue/no-duplicate-attributes': 2, // 禁止属性重复
+        'vue/no-ref-as-operand': 2, // 使用ref对象必须.value
+        'vue/first-attribute-linebreak': [
+            2,
+            {
+                singleline: 'ignore',
+                multiline: 'below',
+            },
+        ], // 强制设置第一个属性的位置
+
         '@typescript-eslint/no-this-alias': [
             'warn',
             {
@@ -72,8 +75,34 @@ module.exports = {
                 allowedNames: ['_this'], // this的別名可以为_this
             },
         ],
+        // eslint（https://eslint.bootcss.com/docs/rules/）
+        'no-unexpected-multiline': 2, // 禁止空余的多行
+        'no-await-in-loop': 2, // 该规则不允许在循环体中使用 await
+        'no-dupe-else-if': 2, // 禁止 if-else-if 链中的重复条件
+        'no-const-assign': 2, // 禁止重新分配 const 变量
+        'no-dupe-keys': 2, // 禁止对象字面量中的重复键
+        'no-multiple-empty-lines': ['warn', { max: 1 }], // 不允许多个空行
+        'no-unused-vars': 2, // 禁止未使用的变量
+        'use-isnan': 2, // 检查 NaN 时需要调用 isNaN()
+        'valid-typeof': 2, // 强制将 typeof 表达式与有效字符串进行比较
+        'no-var': 2, // 要求使用 let 或 const 而不是 var
+        'no-extra-semi': 2, // 禁止不必要的分号
+        'no-multi-str': 2, // 禁止多行字符串
+        'no-unused-labels': 2, // 禁止未使用的标签
+        'array-bracket-newline': [2, 'consistent'], // 在打开数组括号之后和关闭数组括号之前强制换行
+        eqeqeq: [2, 'smart'], // 必须使用全等
+        'arrow-spacing': 2, // 在箭头函数中的箭头前后强制执行一致的间距
+        'function-call-argument-newline': [2, 'consistent'], // 在函数调用的参数之间强制换行
+        'no-undef': 2, // 禁止使用未声明的变量，除非在 /*global */ 注释中提及
+        complexity: [2, 15],
+        indent: [2, 4, { SwitchCase: 1 }],
+        'valid-jsdoc': 0, //jsdoc规则
+        'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
+        'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+        'no-useless-escape': 0, // 禁止不必要的转义字符
+        '@typescript-eslint/ban-types': 0, // 允许使用function 声明函数
         'prettier/prettier': [
-            'error',
+            2,
             {
                 //在单独的箭头函数参数周围包括括号 always：(x) => x \ avoid：x => x
                 arrowParens: 'always',

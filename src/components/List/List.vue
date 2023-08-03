@@ -20,9 +20,13 @@ type listPropsInt = {
 }
 
 const props = withDefaults(defineProps<listPropsInt>(), {
-    api: () => {},
+    api: () => {
+        console.log('api')
+    },
     isNeedSearch: true,
-    options: () => {},
+    options: () => {
+        console.log('options')
+    },
 })
 
 const inputTxt = ref('')
@@ -50,7 +54,7 @@ const inputChange = debounce(() => {
     <view v-for="(item, index) in list" :key="index">
         <slot v-bind:item="item" v-bind:index="index"></slot>
     </view>
-    <ListState :isEmpty="isEmpty" :isLoading="isLoading" :isNoData="isNoData"></ListState>
+    <ListState :is-empty="isEmpty" :is-loading="isLoading" :is-no-data="isNoData"></ListState>
 </template>
 <style lang="scss" scoped>
 .search_box {
