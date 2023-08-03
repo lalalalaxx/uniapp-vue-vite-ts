@@ -62,7 +62,7 @@ module.exports = {
             'warn',
             {
                 allowDestructuring: false, // Disallow `const { props, state } = this`; true by default
-                allowedNames: ['that'], // this的別名可以为that
+                allowedNames: ['_this'], // this的別名可以为_this
             },
         ],
         'prettier/prettier': [
