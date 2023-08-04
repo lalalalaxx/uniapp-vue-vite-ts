@@ -8,12 +8,6 @@ onShow(() => {
 onHide(() => {
     console.log('App Hide')
 })
-// 全局变量
-// provide('globalObj', <globalObjInt>{
-// 	// 公用跳转方法
-// 	goToPage
-// });
-// // 引入静态资源
 </script>
 
 <style lang="scss">
