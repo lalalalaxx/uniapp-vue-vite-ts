@@ -43,7 +43,6 @@ export default defineConfig((config) => {
             }
         },
         server: {
-            // 不起作用
             // port: 3000,
             proxy: {
                 [VITE_APP_BASE_PRE]: {

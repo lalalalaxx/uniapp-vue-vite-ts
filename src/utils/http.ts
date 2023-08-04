@@ -16,7 +16,13 @@ const requestObj = {
                 reject({ message: '加载中' })
             }
             _this.isLock = true
+            console.log('url', import.meta.env, url)
+            // #ifdef H5
             url = import.meta.env.VITE_APP_BASE_PRE + url
+            // #endif
+            // #ifndef H5
+            url = import.meta.env.VITE_APP_BASE_URL + url
+            // #endif
 
             const header = {
                 'content-type': 'application/json',
@@ -25,7 +31,6 @@ const requestObj = {
             if (userStore.token) {
                 header['Authorization'] = 'Bearer' + userStore.token
             }
-            // console.log("url", import.meta.env, url);
             uni.request({
                 url,
                 header,
