@@ -4,7 +4,7 @@ module.exports = {
     env: {
         browser: true,
         es2021: true,
-        node: true,
+        node: true
     },
     globals: {},
     /* 指定如何解析语法 */
@@ -16,8 +16,8 @@ module.exports = {
         parser: '@typescript-eslint/parser',
         jsxPragma: 'React',
         ecmaFeatures: {
-            jsx: true,
-        },
+            jsx: true
+        }
     },
     /* 继承已有的规则 */
     extends: ['eslint:recommended', 'plugin:vue/vue3-essential', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
@@ -26,9 +26,9 @@ module.exports = {
         {
             files: ['*.ts', '*.tsx', '*.vue'],
             rules: {
-                'no-undef': 0,
-            },
-        },
+                'no-undef': 0
+            }
+        }
     ],
     /*
      * 'off' 或 0    ==>  关闭规则
@@ -63,16 +63,16 @@ module.exports = {
             2,
             {
                 singleline: 'ignore',
-                multiline: 'below',
-            },
+                multiline: 'below'
+            }
         ], // 强制设置第一个属性的位置
 
         '@typescript-eslint/no-this-alias': [
             'warn',
             {
                 allowDestructuring: false, // Disallow `const { props, state } = this`; true by default
-                allowedNames: ['_this'], // this的別名可以为_this
-            },
+                allowedNames: ['_this'] // this的別名可以为_this
+            }
         ],
         // eslint（https://eslint.bootcss.com/docs/rules/）
         'no-unexpected-multiline': 2, // 禁止空余的多行
@@ -130,14 +130,14 @@ module.exports = {
                 // 缩进空格数，默认2个空格
                 tabWidth: 4,
                 // 多行时尽可能打印尾随逗号。（例如，单行数组永远不会出现逗号结尾。） 可选值"<none|es5|all>"，默认none
-                trailingComma: 'es5',
+                trailingComma: 'none',
                 // 使用制表符而不是空格缩进行
                 useTabs: false,
                 // Vue文件脚本和样式标签缩进
                 vueIndentScriptAndStyle: false,
                 // 换行符使用 lf 结尾是 可选值"<auto|lf|crlf|cr>"
-                endOfLine: 'auto',
-            },
-        ],
-    },
+                endOfLine: 'auto'
+            }
+        ]
+    }
 }

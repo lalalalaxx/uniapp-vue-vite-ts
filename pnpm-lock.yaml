@@ -115,6 +115,9 @@ devDependencies:
   husky:
     specifier: ^8.0.0
     version: 8.0.3
+  pinia-plugin-unistorage:
+    specifier: ^0.0.17
+    version: 0.0.17(typescript@4.9.4)(vue@3.2.45)
   prettier:
     specifier: ^3.0.0
     version: 3.0.0
@@ -3319,7 +3322,6 @@ packages:
 
   /@vue/devtools-api@6.5.0:
     resolution: {integrity: sha512-o9KfBeaBmCKl10usN4crU53fYtC1r7jJwdGKjPT24t348rHxgfpZ0xL3Xm/gLUYnc0oTp8LAmrxOeLyu6tbk2Q==}
-    dev: false
 
   /@vue/reactivity-transform@3.2.45:
     resolution: {integrity: sha512-BHVmzYAvM7vcU5WmuYqXpwaBHjsS8T63jlKGWVtHxAHIoMIlmaMyurUSEs1Zcg46M4AYT5MtB1U274/2aNzjJQ==}
@@ -6852,6 +6854,16 @@ packages:
       pinia: 2.0.36(typescript@4.9.4)(vue@3.2.45)
     dev: false
 
+  /pinia-plugin-unistorage@0.0.17(typescript@4.9.4)(vue@3.2.45):
+    resolution: {integrity: sha512-Oo4KTWyZP+7/fRRGG5ACoFIBZznEgFt8SPSOcg99t5NHzFP1wSTAfgl25eRr7Tv11pkWyzgZSa3oMGVIBBs1MA==}
+    dependencies:
+      pinia: 2.0.36(typescript@4.9.4)(vue@3.2.45)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - typescript
+      - vue
+    dev: true
+
   /pinia@2.0.36(typescript@4.9.4)(vue@3.2.45):
     resolution: {integrity: sha512-4UKApwjlmJH+VuHKgA+zQMddcCb3ezYnyewQ9NVrsDqZ/j9dMv5+rh+1r48whKNdpFkZAWVxhBp5ewYaYX9JcQ==}
     peerDependencies:
@@ -6868,7 +6880,6 @@ packages:
       typescript: 4.9.4
       vue: 3.2.45
       vue-demi: 0.14.5(vue@3.2.45)
-    dev: false
 
   /pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
@@ -8060,7 +8071,6 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.45
-    dev: false
 
   /vue-eslint-parser@9.3.1(eslint@8.46.0):
     resolution: {integrity: sha512-Clr85iD2XFZ3lJ52/ppmUDG/spxQu6+MAeHXjjyI4I1NUYZ9xmenQp4N0oaHJhrA8OOxltCVxMRfANGa70vU0g==}

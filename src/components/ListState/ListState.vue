@@ -8,31 +8,31 @@ defineProps({
     // 分页加载数据有无下一页
     isNoData: {
         type: Boolean,
-        default: false,
+        default: false
     },
     // 正在加载中
     isLoading: {
         type: Boolean,
-        default: false,
+        default: false
     },
     // 暂无数据
     isEmpty: {
         type: Boolean,
-        default: false,
+        default: false
     },
     // 暂无数据使用
     imgUrl: {
         type: String,
-        default: '../../static/pubImgs/empty.png',
+        default: '../../static/pubImgs/empty.png'
     },
     imgIsShow: {
         type: Boolean,
-        default: true,
+        default: true
     },
     tips: {
         type: String,
-        default: '暂无数据~',
-    },
+        default: '暂无数据~'
+    }
 })
 </script>
 

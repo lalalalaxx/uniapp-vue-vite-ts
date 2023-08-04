@@ -1,8 +1,4 @@
 <script setup lang="ts">
-// import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
-// import type { globalObjInt } from '@/types/globals'
-// import { provide } from 'vue'
-// import { goToPage } from "@/utils/Main"
 onLaunch(() => {
     console.log('App Launch')
 })

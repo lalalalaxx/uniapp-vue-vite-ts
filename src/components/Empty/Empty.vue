@@ -4,16 +4,16 @@
 defineProps({
     imgUrl: {
         type: String,
-        default: '../../static/pubImgs/empty.png',
+        default: '../../static/pubImgs/empty.png'
     },
     isImgShow: {
         type: Boolean,
-        default: true,
+        default: true
     },
     tips: {
         type: String,
-        default: '暂无数据~',
-    },
+        default: '暂无数据~'
+    }
 })
 </script>
 <template>

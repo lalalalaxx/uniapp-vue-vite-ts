@@ -4,13 +4,13 @@ import { ref } from 'vue'
 import { onReady } from '@dcloudio/uni-app'
 import type { userInfoInt } from '@/apis/login/type'
 import useUserStore from '@/store/user'
-import { debounce } from '@/utils/Main'
+import { debounce } from '@/utils/util'
 // vuex数据相关
-let userStore = useUserStore()
+const userStore = useUserStore()
 // 表单数据
 const userInfo = ref<userInfoInt>({
     username: 'admin',
-    password: 'admin',
+    password: 'admin'
 })
 // 规则
 const rules = {
@@ -18,14 +18,14 @@ const rules = {
         type: 'string',
         required: true,
         message: '请输入账号',
-        trigger: ['blur', 'change'],
+        trigger: ['blur', 'change']
     },
     password: {
         type: 'string',
         required: true,
         message: '请输入密码',
-        trigger: ['blur', 'change'],
-    },
+        trigger: ['blur', 'change']
+    }
 }
 // 密码输入框的类型切换
 let inputType = ref<number>(1)
@@ -39,10 +39,12 @@ const clickChangeInput = (type: number) => {
 const uForms = ref()
 // 提交表单
 const submit = debounce(() => {
-    console.log('uForm', uForms)
+    // userStore.aaa = '11111111111111'
+    // return
     uForms.value
         .validate()
         .then(() => {
+            console.log('login')
             // uni.$u.toast('校验通过')
             userStore.login(userInfo.value)
         })

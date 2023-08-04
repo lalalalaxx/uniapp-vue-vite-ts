@@ -24,7 +24,7 @@ export function usePagingLoad(Query: any) {
 
     queryParams = {
         page: 1,
-        limit: 10,
+        limit: 10
     }
 
     const total = ref(0)
@@ -69,7 +69,7 @@ export function usePagingLoad(Query: any) {
         queryParams = reactive({ ...queryParams, ...obj })
 
         uni.showLoading({
-            title: '加载中...',
+            title: '加载中...'
         })
         isLoading.value = true
         const res = await Query(queryParams)
@@ -95,7 +95,7 @@ export function usePagingLoad(Query: any) {
         if (isClear) {
             queryParams = reactive({
                 page: 1,
-                limit: 10,
+                limit: 10
             })
         } else {
             queryParams.page = 1
@@ -122,6 +122,6 @@ export function usePagingLoad(Query: any) {
         ReLoad,
         isNoData,
         isEmpty,
-        isLoading,
+        isLoading
     }
 }

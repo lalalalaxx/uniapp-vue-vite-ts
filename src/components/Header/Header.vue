@@ -7,7 +7,7 @@
  * @date: 2023-07-16 09:32:09
  * @version: V1.0.2
  */
-import { goToPage } from '@/utils/Main'
+import { goToPage } from '@/utils/util'
 import { ref, watchEffect } from 'vue'
 
 type headerInt = {
@@ -43,7 +43,7 @@ const props = withDefaults(defineProps<headerInt>(), {
     isShowHeaderBox: true,
     positionState: 'fixed',
     isShowShadow: false,
-    isBlackIcon: false,
+    isBlackIcon: false
 })
 
 let { statusBarHeight } = uni.getSystemInfoSync()
@@ -71,7 +71,7 @@ const goBack = () => {
     if (getCurrentPages().length <= 1) {
         goToPage({
             url: '/pages/index/index',
-            mode: 'redirectTo',
+            mode: 'redirectTo'
         })
     } else {
         uni.navigateBack()
@@ -87,7 +87,7 @@ const goBack = () => {
                 boxShadow: isShowShadow ? '0 0 8rpx -3rpx #333' : '0 0 0 0 #333',
                 background: backgroundColor,
                 color: textColor,
-                position: positionState,
+                position: positionState
             }"
         >
             <view class="status_bar" :style="{ height: statusBarHeight + 'px' }"></view>

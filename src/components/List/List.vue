@@ -9,7 +9,7 @@
  */
 import { LoadData } from '@/hooks/useListLoadClass'
 import { ref } from 'vue'
-import { debounce } from '@/utils/Main'
+import { debounce } from '@/utils/util'
 import { toRefs } from 'vue'
 
 type listPropsInt = {
@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<listPropsInt>(), {
     isNeedSearch: true,
     options: () => {
         console.log('options')
-    },
+    }
 })
 
 const inputTxt = ref('')
@@ -39,7 +39,7 @@ if (props.isNeedSearch) {
 let { list, isLoading, isEmpty, isNoData, ReLoad } = LoadData({
     api: api.value,
     afterLoadData: afterLoadData?.value,
-    options: options.value,
+    options: options.value
 })
 
 const inputChange = debounce(() => {

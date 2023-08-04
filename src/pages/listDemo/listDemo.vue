@@ -5,9 +5,9 @@ import { demo } from '@/apis/demo'
 
 const afterLoadData = (data: any) => {
     console.log(789, data)
-    data.data.data.map((v: any) => {
-        v.name = '你猜'
-    })
+    // data.data.items.map((v: any) => {
+    //     v.name = '你猜'
+    // })
 }
 </script>
 
@@ -15,7 +15,7 @@ const afterLoadData = (data: any) => {
     <view>
         <Header :title="'列表测试页面'"></Header>
         <List :api="demo" :after-load-data="afterLoadData">
-            <template v-slot="{ item, index }">{{ index }} ---- {{ item }}</template>
+            <template v-slot="{ item, index }">{{ index }} ---- {{ item.name }}</template>
         </List>
     </view>
 </template>

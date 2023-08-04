@@ -12,10 +12,10 @@ class LoadDataClass {
     // 请求参数
     static queryParams = {
         page: 1,
-        limit: 10,
+        limit: 10
     }
     // 列表数据
-    list = ref([])
+    list = ref<any[]>([])
     total = ref(0)
     // 前置处理方法
     afterLoadData: Function | undefined
@@ -53,13 +53,13 @@ class LoadDataClass {
     // 加载数据
     LoadData = async () => {
         uni.showLoading({
-            title: '加载中...',
+            title: '加载中...'
         })
         this.isLoading.value = true
         const res = await this.Query(LoadDataClass.queryParams)
         this.afterLoadData && this.afterLoadData(res)
         this.total.value = res.data.total
-        this.list.value = this.list.value.concat(res.data.data)
+        this.list.value = this.list.value.concat(res.data.items)
 
         uni.hideLoading()
         uni.stopPullDownRefresh()
@@ -75,7 +75,7 @@ class LoadDataClass {
     queryParamsReset = () => {
         LoadDataClass.queryParams = {
             page: 1,
-            limit: 10,
+            limit: 10
         }
     }
 
@@ -120,6 +120,6 @@ export function LoadData({ api, afterLoadData, options }: LoadDataInt) {
         isLoading: data.isLoading,
         isNoData: data.isNoData,
         isEmpty: data.isEmpty,
-        ReLoad: data.ReLoad,
+        ReLoad: data.ReLoad
     }
 }

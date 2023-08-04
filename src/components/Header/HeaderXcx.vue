@@ -21,44 +21,44 @@ defineProps({
     // 状态栏文字颜色
     statusColor: {
         type: String,
-        default: 'black',
+        default: 'black'
     },
     // 是否固定
     fixed: {
         type: Boolean,
-        default: false,
+        default: false
     },
     // 背景色
     backGround: {
         type: String,
-        default: 'transparent',
+        default: 'transparent'
     },
     textColor: {
         type: String,
-        default: '#000',
+        default: '#000'
     },
     goBack: {
         type: Boolean,
-        default: true,
+        default: true
     },
     centerText: {
         type: String,
-        default: '',
+        default: ''
     },
     leftTxt: {
         type: String,
-        default: '',
+        default: ''
     },
     // 白色返回按钮
     isWhiteBack: {
         type: Boolean,
-        default: false,
+        default: false
     },
     // 是否需要阴影
     isBoxShadow: {
         type: Boolean,
-        default: true,
-    },
+        default: true
+    }
 })
 
 // 获取状态栏高度
@@ -76,7 +76,7 @@ const getStatusHeight = () => {
             paddingTop.value = menuButton.top
             paddingBot.value = menuButton.top - res?.statusBarHeight
             // #endif
-        },
+        }
     })
 }
 
@@ -99,7 +99,7 @@ onMounted(() => {
                 height: menuHeight + 'px',
                 paddingTop: paddingTop + 'px',
                 paddingBottom: paddingBot + 'px',
-                background: backGround,
+                background: backGround
             }"
         >
             <view class="action">

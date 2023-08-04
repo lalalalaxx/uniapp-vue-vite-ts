@@ -1,5 +1,5 @@
 import useUserStore from '../store/user'
-import { goToPage } from '@/utils/Main'
+import { goToPage } from '@/utils/util'
 interface Response {
     code: number
     data: object
@@ -20,7 +20,7 @@ const requestObj = {
 
             const header = {
                 'content-type': 'application/json',
-                Authorization: '',
+                Authorization: ''
             }
             if (userStore.token) {
                 header['Authorization'] = 'Bearer' + userStore.token
@@ -43,7 +43,7 @@ const requestObj = {
                             setTimeout(() => {
                                 goToPage({
                                     url: '/pages/login/login',
-                                    mode: 'navigateTo',
+                                    mode: 'navigateTo'
                                 })
                             }, 1000)
                         } else {
@@ -63,10 +63,10 @@ const requestObj = {
                 complete() {
                     console.log('complete')
                     _this.isLock = false
-                },
+                }
             })
         })
-    },
+    }
 }
 
 export const request = requestObj

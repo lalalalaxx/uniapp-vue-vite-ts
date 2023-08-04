@@ -19,8 +19,8 @@ export default defineConfig((config) => {
             AutoImport({
                 imports: ['vue', 'uni-app'],
                 // 生成自动导入的TS声明文件
-                dts: './src/types/auto-import.d.ts',
-            }),
+                dts: './src/types/auto-import.d.ts'
+            })
             // Components({
             //     dts: './src/types/auto-components.d.ts',
             //     dirs: [path.resolve(__dirname, './src/components')],
@@ -32,15 +32,15 @@ export default defineConfig((config) => {
         resolve: {
             // 别名
             alias: {
-                '@': path.join(__dirname, './src'),
-            },
+                '@': path.join(__dirname, './src')
+            }
         },
         css: {
             preprocessorOptions: {
                 scss: {
-                    additionalData: '@import "./src/uni.scss";',
-                },
-            },
+                    additionalData: '@import "./src/uni.scss";'
+                }
+            }
         },
         server: {
             // 不起作用
@@ -52,9 +52,9 @@ export default defineConfig((config) => {
                     changeOrigin: true,
                     // 要记得加rewrite这句
                     // rewrite: (path) => path.replace(/^\/apis/, ''),
-                    rewrite: (path) => path.replace(new RegExp('^' + VITE_APP_BASE_PRE), ''),
-                },
-            },
-        },
+                    rewrite: (path) => path.replace(new RegExp('^' + VITE_APP_BASE_PRE), '')
+                }
+            }
+        }
     }
 })
