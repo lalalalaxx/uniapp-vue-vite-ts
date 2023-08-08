@@ -27,13 +27,9 @@ image {
 }
 
 /* 弹性盒子 */
-.flex {
-    display: flex;
-}
 
-.flexDc {
-    flex-direction: column;
-}
+
+
 
 .flex1 {
     flex: 1;
@@ -51,52 +47,77 @@ image {
     flex: 4;
 }
 
-.text-align-center {
-    text-align: center;
+%DisplayFlex {
+    display: flex;
 }
 
-.flex-wrap-nowrap {
-    flex-wrap: nowrap;
+@mixin flexFun($align: center, $justify: center) {
+    @extend %DisplayFlex;
+    align-items: $align;
+    justify-content: $justify;
 }
 
-.flex-wrap-wrap {
-    flex-wrap: wrap;
+@mixin flexJustify($align) {
+    &-start {
+        @include flexFun($align, flex-start);
+    }
+
+    &-end {
+        @include flexFun($align, flex-end);
+    }
+
+    &-between {
+        @include flexFun($align, space-between);
+    }
+
+    &-around {
+        @include flexFun($align, space-around);
+    }
 }
 
-.AI-flex-start {
-    align-items: flex-start;
-}
+.flex {
+    @include flexFun;
 
-.AI-flex-end {
-    align-items: flex-end;
-}
+    &-start {
+        @include flexFun(flex-start);
+        @include flexJustify(flex-start);
+    }
 
-.AI-center {
-    align-items: center;
-}
+    &-center {
+        @include flexFun;
+        @include flexJustify(center);
+    }
 
-.AI-wrap {
-    flex-wrap: wrap;
-}
+    &-end {
+        @include flexFun(flex-end);
+        @include flexJustify(flex-end);
+    }
 
-.JC-flex-start {
-    justify-content: flex-start;
-}
+    &-wrap {
+        @extend %DisplayFlex;
+        flex-wrap: wrap;
+    }
 
-.JC-flex-end {
-    justify-content: flex-end;
-}
+    &-no-wrap {
+        @extend %DisplayFlex;
+        flex-wrap: nowrap;
+    }
 
-.JC-center {
-    justify-content: center;
-}
+    &-column {
+        flex-direction: column;
 
-.JC-space-between {
-    justify-content: space-between;
-}
+        &-reverse {
+            flex-direction: column-reverse;
+        }
+    }
 
-.JC-space-around {
-    justify-content: space-around;
+    &-row {
+        flex-direction: row;
+
+        &-reverse {
+            flex-direction: row-reverse;
+        }
+    }
 }
 
 /*-------文字溢出-------*/
