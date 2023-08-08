@@ -58,8 +58,14 @@ image {
 }
 
 @mixin flexJustify($align) {
+    @include flexFun($align);
+
     &-start {
         @include flexFun($align, flex-start);
+    }
+
+    &-center {
+        @include flexFun($align, center);
     }
 
     &-end {
@@ -79,17 +85,14 @@ image {
     @include flexFun;
 
     &-start {
-        @include flexFun(flex-start);
         @include flexJustify(flex-start);
     }
 
     &-center {
-        @include flexFun;
         @include flexJustify(center);
     }
 
     &-end {
-        @include flexFun(flex-end);
         @include flexJustify(flex-end);
     }
 

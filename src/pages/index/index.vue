@@ -20,7 +20,7 @@ const goList = () => {
         这里是首页~
         <button @click="goList">列表</button>
         <button @click="logout">退出</button>
-        <view class="flex flex-wrap">
+        <view class="flex-start-center flex-wrap">
             <view style="width: 40%">1</view>
             <view style="width: 40%">2</view>
             <view style="width: 40%">3</view>
