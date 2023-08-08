@@ -20,13 +20,11 @@ type listPropsInt = {
 }
 
 const props = withDefaults(defineProps<listPropsInt>(), {
-    api: () => {
-        console.log('api')
-    },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    api: () => {},
     isNeedSearch: true,
-    options: () => {
-        console.log('options')
-    }
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    options: () => {}
 })
 
 const inputTxt = ref('')
