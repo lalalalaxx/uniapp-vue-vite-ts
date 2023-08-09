@@ -20,6 +20,11 @@ const goList = () => {
         这里是首页~
         <button @click="goList">列表</button>
         <button @click="logout">退出</button>
+        <view class="aaa flex-center-evenly column">
+            <view class="flex-1">1</view>
+            <view class="flex-1">2</view>
+            <view class="flex-1">3</view>
+        </view>
     </view>
 </template>
 

@@ -27,13 +27,9 @@ image {
 }
 
 /* 弹性盒子 */
-.flex {
-    display: flex;
-}
 
-.flexDc {
-    flex-direction: column;
-}
+
+
 
 .flex1 {
     flex: 1;
@@ -51,52 +47,77 @@ image {
     flex: 4;
 }
 
-.text-align-center {
-    text-align: center;
+[class*="flex-"] {
+    &.column {
+        flex-direction: column;
+    }
+
+    &.reverse {
+        flex-direction: column-reverse;
+    }
+
+    &.wrap {
+        flex-wrap: wrap;
+    }
+
+    &.no-wrap {
+        flex-wrap: nowrap;
+    }
+
+    &.row {
+        flex-direction: row;
+    }
+
+    &.reverse {
+        flex-direction: row-reverse;
+    }
 }
 
-.flex-wrap-nowrap {
-    flex-wrap: nowrap;
+@mixin flexFun($align: center, $justify: center) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
 }
 
-.flex-wrap-wrap {
-    flex-wrap: wrap;
+@mixin flexJustify($align) {
+    @include flexFun($align);
+
+    &-start {
+        @include flexFun($align, flex-start);
+    }
+
+    &-end {
+        @include flexFun($align, flex-end);
+    }
+
+    &-between {
+        @include flexFun($align, space-between);
+    }
+
+    &-around {
+        @include flexFun($align, space-around);
+    }
+
+    &-evenly {
+        @include flexFun($align, space-evenly);
+    }
 }
 
-.AI-flex-start {
-    align-items: flex-start;
-}
+// .flex column
+.flex {
+    @include flexFun;
 
-.AI-flex-end {
-    align-items: flex-end;
-}
+    &-start {
+        @include flexJustify(flex-start);
+    }
 
-.AI-center {
-    align-items: center;
-}
+    &-end {
+        @include flexJustify(flex-end);
+    }
 
-.AI-wrap {
-    flex-wrap: wrap;
-}
-
-.JC-flex-start {
-    justify-content: flex-start;
-}
-
-.JC-flex-end {
-    justify-content: flex-end;
-}
-
-.JC-center {
-    justify-content: center;
-}
-
-.JC-space-between {
-    justify-content: space-between;
-}
-
-.JC-space-around {
-    justify-content: space-around;
+    &-center {
+        @include flexJustify(center);
+    }
 }
 
 /*-------文字溢出-------*/
