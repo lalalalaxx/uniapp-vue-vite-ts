@@ -16,7 +16,6 @@ const requestObj = {
                 reject({ message: '加载中' })
             }
             _this.isLock = true
-            console.log('url', import.meta.env, url)
             // #ifdef H5
             url = import.meta.env.VITE_APP_BASE_PRE + url
             // #endif
@@ -39,7 +38,6 @@ const requestObj = {
                 success(res) {
                     const data = res.data as Response
                     if (res.statusCode === 200) {
-                        console.log('data', data)
                         if (data.code === 200) {
                             // 成功
                             resolve(res.data)
@@ -66,7 +64,6 @@ const requestObj = {
                     reject({ message: '网络错误' })
                 },
                 complete() {
-                    console.log('complete')
                     _this.isLock = false
                 }
             })

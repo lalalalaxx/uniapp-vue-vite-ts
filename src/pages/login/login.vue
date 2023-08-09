@@ -39,8 +39,6 @@ const clickChangeInput = (type: number) => {
 const uForms = ref()
 // 提交表单
 const submit = debounce(() => {
-    // userStore.aaa = '11111111111111'
-    // return
     uForms.value
         .validate()
         .then(() => {
@@ -62,10 +60,10 @@ onReady(() => {
     <view class="login">
         <image class="login_bg" src="@/static/imgs/login_bg.png" mode="aspectFill"></image>
         <Header :title="'登录'" :left-icon-show="false" :background-color="'transparent'" :go-back="false"></Header>
-        <view class="login_main flex JC-center flexDc">
+        <view class="login_main flex-start column">
             <view class="login_mian_title">标题一</view>
             <view class="login_mian_sub_title">业务数据提示系统</view>
-            <u-form :model="userInfo" label-width="10" :rules="rules" ref="uForms">
+            <u-form :model="userInfo" label-width="10" :rules="rules" ref="uForms" class="form_box">
                 <u-form-item class="form_item" prop="username" ref="item1">
                     <u-input
                         placeholder-style="color: #ffffff"
@@ -92,7 +90,6 @@ onReady(() => {
                 </u-form-item>
             </u-form>
             <view class="submit_btn" @click="submit">
-                <!-- :customStyle="{ 'fontSize': '18px' }" -->
                 <u-button shape="circle" icon-color="#fff" text="登录"></u-button>
             </view>
         </view>
@@ -136,6 +133,12 @@ onReady(() => {
             color: rgba(255, 255, 255, 1);
             margin: 20rpx 0 140rpx;
         }
+        :deep(.u-form) {
+            width: 100%;
+            .form_item {
+                width: 100%;
+            }
+        }
 
         :deep(.u-form-item__body__right) {
             border-radius: 100rpx;
@@ -157,9 +160,7 @@ onReady(() => {
 
         .submit_btn {
             margin-top: 110rpx;
-            // :deep(.button__text){
-            // 	font-size: 16px;
-            // }
+            width: 100%;
         }
     }
 }
