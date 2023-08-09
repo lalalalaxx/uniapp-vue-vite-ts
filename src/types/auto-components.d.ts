@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Dialog: typeof import('./../components/Dialog/index.vue')['default']
     Empty: typeof import('./../components/Empty/Empty.vue')['default']
     Header: typeof import('./../components/Header/Header.vue')['default']
     HeaderXcx: typeof import('./../components/Header/HeaderXcx.vue')['default']
