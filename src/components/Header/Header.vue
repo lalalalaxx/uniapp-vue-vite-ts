@@ -95,13 +95,11 @@ const goBack = () => {
             <!-- #ifndef MP-WEIXIN -->
             <view class="header flex AI-center JC-space-between" :style="{ height: headerHeightRef + 'px' }">
                 <view class="header_left flex AI-center JC-space-between">
-                    <view class="icon flex AI-center" @click="goBack" v-if="leftIconShow">
-                        <!-- <image src="../../static/pubImgs/backW.png" mode="widthFix"></image> -->
-                        <image :src="isBlackIcon ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'" mode="widthFix"></image>
-                    </view>
-                    <view class="left_slot">
-                        <slot name="left"></slot>
-                    </view>
+                    <slot name="left" v-if="leftIconShow">
+                        <view class="icon flex AI-center" @click="goBack">
+                            <image :src="isBlackIcon ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'" mode="widthFix"></image>
+                        </view>
+                    </slot>
                 </view>
                 <view class="header_center">
                     <view class="title" :style="{ fontSize: textFontSize + 'rpx' }">
@@ -118,12 +116,11 @@ const goBack = () => {
             <!-- #ifdef MP-WEIXIN -->
             <view class="wx_header flex AI-center" :style="{ height: headerHeightRef + 'px', width: wxHeaderWidth + 'px' }">
                 <view class="wx_header_left flex AI-center">
-                    <view class="icon flex AI-center" @click="goBack" v-if="leftIconShow">
-                        <image :src="isBlackIcon ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'" mode="widthFix"></image>
-                    </view>
-                    <view>
-                        <slot name="left"></slot>
-                    </view>
+                    <slot name="left">
+                        <view class="icon flex AI-center" @click="goBack" v-if="leftIconShow">
+                            <image :src="isBlackIcon ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'" mode="widthFix"></image>
+                        </view>
+                    </slot>
                 </view>
                 <view class="wx_header_txt flex AI-center">
                     <view class="title" :style="{ fontSize: textFontSize + 'rpx' }">
