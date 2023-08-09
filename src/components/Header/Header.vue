@@ -8,7 +8,7 @@
  * @version: V1.0.2
  */
 import { goToPage } from '@/utils/util'
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, type CSSProperties } from 'vue'
 
 type headerInt = {
     // 头部高度 默认为44px （微信小程序不可用）
@@ -66,6 +66,16 @@ watchEffect(() => {
     // #endif
 })
 
+const style = computed(() => {
+    console.log(props.positionState === 'fixed')
+
+    return {
+        boxShadow: props.isShowShadow ? '0 0 8rpx -3rpx #333' : '0 0 0 0 #333',
+        background: props.backgroundColor,
+        color: props.textColor,
+        position: props.positionState
+    } as CSSProperties
+})
 // 返回上一页(如没有页面返回首页)
 const goBack = () => {
     if (getCurrentPages().length <= 1) {
@@ -81,15 +91,7 @@ const goBack = () => {
 
 <template>
     <view class="header">
-        <view
-            class="header_main"
-            :style="{
-                boxShadow: isShowShadow ? '0 0 8rpx -3rpx #333' : '0 0 0 0 #333',
-                background: backgroundColor,
-                color: textColor,
-                position: positionState
-            }"
-        >
+        <view class="header_main" :style="style">
             <view class="status_bar" :style="{ height: statusBarHeight + 'px' }"></view>
             <!-- 标准的左中右结构 -->
             <!-- #ifndef MP-WEIXIN -->
@@ -97,7 +99,7 @@ const goBack = () => {
                 <view class="header_left flex AI-center JC-space-between">
                     <view class="icon flex AI-center" @click="goBack" v-if="leftIconShow">
                         <!-- <image src="../../static/pubImgs/backW.png" mode="widthFix"></image> -->
-                        <image :src="isBlackIcon ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'" mode="widthFix"></image>
+                        <image :src="isBlackIcon ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'" mode="widthFix" />
                     </view>
                     <view class="left_slot">
                         <slot name="left"></slot>

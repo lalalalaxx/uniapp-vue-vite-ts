@@ -5,8 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 // import { VantResolver } from 'unplugin-vue-components/resolvers';
 import path from 'path'
 // https://vitejs.dev/config/
-export default defineConfig((config) => {
-    const { mode } = config
+export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd())
     console.log('xxxx', env.VITE_APP_BASE_PRE)
 
