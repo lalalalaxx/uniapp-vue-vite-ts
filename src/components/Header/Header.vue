@@ -56,6 +56,9 @@ let wxHeaderWidth = menuButton.left
 statusBarHeight = menuButton.top
 // #endif
 
+// padding的高度（防止头部塌陷）
+const fillBoxHeight = ref(statusBarHeight + 5)
+
 // 设置header的高度
 const headerHeightRef = ref(0)
 watchEffect(() => {
@@ -89,15 +92,15 @@ const goBack = () => {
 </script>
 
 <template>
-    <view class="header">
+    <view class="header_box">
         <view class="header_main" :style="style">
             <view class="status_bar" :style="{ height: statusBarHeight + 'px' }"></view>
             <!-- 标准的左中右结构 -->
             <!-- #ifndef MP-WEIXIN -->
-            <view class="header flex AI-center JC-space-between" :style="{ height: headerHeightRef + 'px' }">
-                <view class="header_left flex AI-center JC-space-between">
+            <view class="header flex-center-between" :style="{ height: headerHeightRef + 'px' }">
+                <view class="header_left flex-center-between">
                     <slot name="left" v-if="leftIconShow">
-                        <view class="icon flex AI-center" @click="goBack">
+                        <view class="icon flex" @click="goBack">
                             <image :src="isBlackIcon ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'" mode="widthFix"></image>
                         </view>
                     </slot>
@@ -108,22 +111,22 @@ const goBack = () => {
                     </view>
                     <slot name="center"></slot>
                 </view>
-                <view class="header_right flex AI-center JC-center">
+                <view class="header_right flex">
                     <slot name="right"></slot>
                 </view>
             </view>
             <!-- #endif -->
             <!-- 左右结构 -->
             <!-- #ifdef MP-WEIXIN -->
-            <view class="wx_header flex AI-center" :style="{ height: headerHeightRef + 'px', width: wxHeaderWidth + 'px' }">
-                <view class="wx_header_left flex AI-center">
+            <view class="wx_header flex" :style="{ height: headerHeightRef + 'px', width: wxHeaderWidth + 'px' }">
+                <view class="wx_header_left flex">
                     <slot name="left">
-                        <view class="icon flex AI-center" @click="goBack" v-if="leftIconShow">
+                        <view class="icon flex" @click="goBack" v-if="leftIconShow">
                             <image :src="isBlackIcon ? '../../static/pubImgs/back.png' : '../../static/pubImgs/backW.png'" mode="widthFix"></image>
                         </view>
                     </slot>
                 </view>
-                <view class="wx_header_txt flex AI-center">
+                <view class="wx_header_txt flex">
                     <view class="title" :style="{ fontSize: textFontSize + 'rpx' }">
                         {{ title }}
                     </view>
@@ -133,14 +136,14 @@ const goBack = () => {
             <!-- #endif -->
         </view>
         <!-- 填充头部防止塌陷 -->
-        <view class="status_bar" :style="{ height: statusBarHeight + 'px' }"></view>
+        <view class="status_bar" :style="{ height: fillBoxHeight + 'px' }"></view>
         <view v-if="isShowHeaderBox" :style="{ height: headerHeightRef + 'px', background: backgroundColor2 }"></view>
     </view>
 </template>
 
 <style lang="scss" scoped>
-.header {
-    padding: 0 20rpx 10rpx;
+.header_box {
+    // padding: 0 20rpx 5rpx;
 }
 
 .header_main {
@@ -148,10 +151,11 @@ const goBack = () => {
     z-index: 9999;
     top: 0;
     left: 0;
-    padding: 0 20rpx 10rpx;
+    padding: 5rpx 20rpx 5rpx;
+    box-sizing: border-box;
 
     .header {
-        padding: 0 16rpx;
+        // padding: 0 16rpx;
         box-sizing: border-box;
 
         .header_left {

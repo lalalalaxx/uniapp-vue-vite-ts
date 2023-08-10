@@ -16,6 +16,7 @@ const goList = () => {
         url: '/pages/listDemo/listDemo'
     })
 }
+console.log('userStore', userStore.userInfo)
 
 const showDialog = () => {
     dialogRef.value!.show = true
