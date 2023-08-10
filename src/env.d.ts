@@ -8,3 +8,7 @@ declare module '*.vue' {
 }
 
 declare module 'uview-plus'
+
+interface Uni {
+    goToPage: Function
+}

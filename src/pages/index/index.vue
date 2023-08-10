@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Header from '@/components/Header/Header.vue'
-// import Dialogs from '@/components/Dialog/index.vue'
 import useUserStore from '@/store/user'
 import { goToPage } from '@/utils/util'
 
@@ -16,7 +14,6 @@ const goList = () => {
         url: '/pages/listDemo/listDemo'
     })
 }
-console.log('userStore', userStore.userInfo)
 
 const showDialog = () => {
     dialogRef.value!.show = true
@@ -24,7 +21,7 @@ const showDialog = () => {
 </script>
 <template>
     <view class="index">
-        <Header :title="'首页'" :left-icon-show="false"></Header>
+        <lx-header :title="'首页'" :left-icon-show="false"></lx-header>
         这里是首页~
         <button @click="goList">列表</button>
         <button @click="logout">退出</button>

@@ -6,7 +6,11 @@ module.exports = {
         es2021: true,
         node: true
     },
-    globals: {},
+    globals: {
+        uni: true,
+        wx: true,
+        getCurrentPages: true
+    },
     /* 指定如何解析语法 */
     parser: 'vue-eslint-parser',
     /** 优先级低于 parse 的语法解析配置 */

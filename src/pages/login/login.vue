@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import Header from '@/components/Header/Header.vue'
-import { ref } from 'vue'
-import { onReady } from '@dcloudio/uni-app'
+// import Header from '@/components/Header/Header.vue'
 import type { userInfoInt } from '@/apis/login/type'
 import useUserStore from '@/store/user'
 import { debounce } from '@/utils/util'
@@ -59,7 +57,7 @@ onReady(() => {
 <template>
     <view class="login">
         <image class="login_bg" src="@/static/imgs/login_bg.png" mode="aspectFill"></image>
-        <Header :title="'登录'" :left-icon-show="false" :background-color="'transparent'" :go-back="false"></Header>
+        <lx-header :title="'登录'" :left-icon-show="false" :background-color="'transparent'" :go-back="false"></lx-header>
         <view class="login_main flex-start column">
             <view class="login_mian_title">标题一</view>
             <view class="login_mian_sub_title">业务数据提示系统</view>
