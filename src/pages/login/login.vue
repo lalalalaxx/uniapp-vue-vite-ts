@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onReady } from '@dcloudio/uni-app'
+// import Header from '@/components/Header/Header.vue'
 import type { userInfoInt } from '@/apis/login/type'
 import useUserStore from '@/store/user'
 
@@ -145,6 +145,12 @@ onReady(() => {
                 &::placeholder {
                     color: #fff;
                 }
+            }
+        }
+        :deep(.u-form) {
+            width: 100%;
+            .form_item {
+                width: 100%;
             }
         }
 

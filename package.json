@@ -64,7 +64,6 @@
         "pinia": "2.0.36",
         "sass": "^1.63.4",
         "uview-plus": "^3.1.32",
-        "vant": "^4.6.4",
         "vue": "^3.2.45"
     },
     "devDependencies": {

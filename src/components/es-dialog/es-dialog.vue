@@ -66,6 +66,10 @@ const isUseConfirmButton = computed(() => {
     return slots?.confirmButton !== undefined
 })
 
+onMounted(() => {
+    console.log('isUseConfirmButton', isUseConfirmButton)
+})
+
 defineExpose({
     show
 })

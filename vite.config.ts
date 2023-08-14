@@ -1,8 +1,7 @@
 import { defineConfig, loadEnv } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
-import Components from 'unplugin-vue-components/vite'
+// import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-// import { VantResolver } from 'unplugin-vue-components/resolvers';
 import path from 'path'
 const pathSrc = path.resolve(__dirname, 'src')
 
@@ -22,17 +21,14 @@ export default defineConfig(({ mode }) => {
                 // 生成自动导入的TS声明文件
                 vueTemplate: true,
                 dts: path.resolve(pathSrc, 'types', 'auto-imports.d.ts')
-            }),
-            Components({
-                dts: path.resolve(pathSrc, 'types', 'auto-components.d.ts')
             })
+            // Components({
+            //     dts: path.resolve(pathSrc, 'types', 'auto-components.d.ts')
+            // })
             // Components({
             //     dts: './src/types/auto-components.d.ts',
             //     dirs: [path.resolve(__dirname, './src/components')],
             // }),
-            // ,Components({
-            // 	resolvers: [VantResolver()],
-            // })
         ],
         resolve: {
             // 别名

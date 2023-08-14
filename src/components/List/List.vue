@@ -8,9 +8,7 @@
  * @version: V1.0.0
  */
 import { LoadData } from '@/hooks/useListLoadClass'
-import { ref } from 'vue'
 import { debounce } from '@/utils/util'
-import { toRefs } from 'vue'
 
 type listPropsInt = {
     api: Function
@@ -20,13 +18,11 @@ type listPropsInt = {
 }
 
 const props = withDefaults(defineProps<listPropsInt>(), {
-    api: () => {
-        console.log('api')
-    },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    api: () => {},
     isNeedSearch: true,
-    options: () => {
-        console.log('options')
-    }
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    options: () => {}
 })
 
 const inputTxt = ref('')

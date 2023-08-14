@@ -7,7 +7,9 @@ module.exports = {
         node: true
     },
     globals: {
-        NodeJS: 'readonly'
+        uni: true,
+        wx: true,
+        getCurrentPages: true
     },
     /* 指定如何解析语法 */
     parser: 'vue-eslint-parser',
@@ -56,7 +58,7 @@ module.exports = {
         'vue/no-setup-props-destructure': 0, // 禁止 props 解构传递给 setup
         'vue/no-v-model-argument': 0, // 不允许添加要在 v-model 自定义组件中使用的参数
         'vue/component-definition-name-casing': [2, 'PascalCase'], // 强制使用组件定义名称的特定大小写 PascalCase | kebab-case
-        'vue/attribute-hyphenation': [2, 'always', { ignore: [] }], // 对模板中的自定义组件强制实施属性命名样式
+        'vue/attribute-hyphenation': [0, 'always', { ignore: [] }], // 对模板中的自定义组件强制实施属性命名样式
         'vue/no-dupe-keys': [2, { groups: [] }], // 不允许重复字段名称
         'vue/no-dupe-v-else-if': 2, // 不允许 / v-else-if 链中的 v-if 重复条件
         'vue/no-duplicate-attributes': 2, // 禁止属性重复
