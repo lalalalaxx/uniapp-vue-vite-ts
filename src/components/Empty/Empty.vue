@@ -4,7 +4,7 @@
 defineProps({
     imgUrl: {
         type: String,
-        default: '../../static/pubImgs/empty.png'
+        default: '../../static/empty.png'
     },
     isImgShow: {
         type: Boolean,

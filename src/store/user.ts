@@ -25,21 +25,16 @@ export default defineStore(
             return userInfo.value.user
         })
         // 登录
-        async function login(params: userInfoInt) {
-            const loginRes: any = await loginApi(params)
-
-            userInfo.value = loginRes.data
-            uni.showToast({
-                title: '登录成功',
-                icon: 'none',
-                success: () => {
-                    setTimeout(() => {
-                        goToPage({
-                            url: '/pages/index/index',
-                            mode: 'redirectTo'
-                        })
-                    }, 2000)
-                }
+        function login(params: userInfoInt) {
+            return new Promise((resolve, reject) => {
+                loginApi(params)
+                    .then((res: any) => {
+                        userInfo.value = res.data
+                        resolve(res)
+                    })
+                    .catch((err) => {
+                        reject(err)
+                    })
             })
         }
         // 退出登录

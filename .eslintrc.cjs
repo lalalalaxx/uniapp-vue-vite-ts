@@ -6,7 +6,9 @@ module.exports = {
         es2021: true,
         node: true
     },
-    globals: {},
+    globals: {
+        NodeJS: 'readonly'
+    },
     /* 指定如何解析语法 */
     parser: 'vue-eslint-parser',
     /** 优先级低于 parse 的语法解析配置 */
@@ -37,7 +39,7 @@ module.exports = {
      */
     rules: {
         // typeScript (https://typescript-eslint.io/rules)
-        '@typescript-eslint/no-unused-vars': 2, // 禁止定义未使用的变量
+        '@typescript-eslint/no-unused-vars': [2, { argsIgnorePattern: '^_' }], // 禁止定义未使用的变量
         '@typescript-eslint/prefer-ts-expect-error': 2, // 禁止使用 @ts-ignore
         '@typescript-eslint/no-explicit-any': 0, // 禁止使用 any 类型
         '@typescript-eslint/no-non-null-assertion': 0,
@@ -75,13 +77,14 @@ module.exports = {
             }
         ],
         // eslint（https://eslint.bootcss.com/docs/rules/）
+        // 'object-curly-spacing': 0, // 在大括号内强制执行一致的间距
         'no-unexpected-multiline': 2, // 禁止空余的多行
         'no-await-in-loop': 2, // 该规则不允许在循环体中使用 await
         'no-dupe-else-if': 2, // 禁止 if-else-if 链中的重复条件
         'no-const-assign': 2, // 禁止重新分配 const 变量
         'no-dupe-keys': 2, // 禁止对象字面量中的重复键
         'no-multiple-empty-lines': ['warn', { max: 1 }], // 不允许多个空行
-        'no-unused-vars': 2, // 禁止未使用的变量
+        'no-unused-vars': 0, // 禁止未使用的变量
         'use-isnan': 2, // 检查 NaN 时需要调用 isNaN()
         'valid-typeof': 2, // 强制将 typeof 表达式与有效字符串进行比较
         'no-var': 2, // 要求使用 let 或 const 而不是 var

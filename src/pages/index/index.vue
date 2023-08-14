@@ -1,40 +1,35 @@
 <script setup lang="ts">
-import Header from '@/components/Header/Header.vue'
 import useUserStore from '@/store/user'
-import { goToPage } from '@/utils/util'
 
 const userStore = useUserStore()
-const dialogRef = ref()
 
+const dialogRef = ref()
 const logout = () => {
     userStore.logOut()
-}
-
-const goList = () => {
-    goToPage({
-        url: '/pages/listDemo/listDemo'
-    })
 }
 
 const showDialog = () => {
     dialogRef.value!.show = true
 }
+
+const throttle = uni.$util.throttle((num: number, age: number) => {
+    console.log(num, age)
+    return num + age
+}, 1000)
+
+console.log('xxx', uni.$util.formatTime(Date.now(), 'yyyy-MM-dd'))
 </script>
 <template>
     <view class="index">
-        <Header :title="'首页'" :left-icon-show="false"></Header>
-        这里是首页~
-        <button @click="goList">列表</button>
+        <ex-header ref="headeRef" :title="'首页'" :left-icon-show="true" />
+
         <button @click="logout">退出</button>
         <button @tap="showDialog">弹窗</button>
-        <view class="aaa flex-center-evenly column">
-            <view class="flex-1">1</view>
-            <view class="flex-1">2</view>
-            <view class="flex-1">3</view>
-        </view>
-        <Dialog ref="dialogRef" :show-cancel-button="false">
+        <button @tap="throttle">弹窗</button>
+
+        <ex-dialog ref="dialogRef" :show-cancel-button="true">
             <view>模态框，常用于消息提示、消息确认、在当前页面内完成特定的交互操作</view>
-        </Dialog>
+        </ex-dialog>
     </view>
 </template>
 

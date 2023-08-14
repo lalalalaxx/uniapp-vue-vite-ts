@@ -5,11 +5,7 @@
 /* 颜色变量 */
 @import 'uview-plus/theme.scss';
 
-
-/* ----------------------------------- */
-/* -------------单样式----------------- */
-/* ----------------------------------- */
-/* 文字尺寸 */
+/*============================= 文字尺寸 =============================*/
 $font-size-20: 20rpx;
 $font-size-22: 22rpx;
 $font-size-24: 24rpx;
@@ -26,10 +22,84 @@ image {
     height: 100%;
 }
 
-/* 弹性盒子 */
+/*============================= 弹性盒子 =============================*/
+@mixin displayFlex($align: center, $justify: center) {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: $align;
+    justify-content: $justify;
+}
 
+@mixin alignItems($align: center) {
+    @include displayFlex($align, center);
 
+    &-start {
+        @include displayFlex($align, flex-start);
+    }
 
+    &-center {
+        @include displayFlex($align, center);
+    }
+
+    &-end {
+        @include displayFlex($align, flex-end);
+    }
+
+    &-between {
+        @include displayFlex($align, space-between);
+    }
+
+    &-around {
+        @include displayFlex($align, space-around);
+    }
+
+    &-evenly {
+        @include displayFlex($align, space-evenly);
+    }
+}
+
+.flex {
+    @include displayFlex;
+
+    &-center {
+        @include alignItems(center);
+    }
+
+    &-start {
+        @include alignItems(flex-start);
+    }
+
+    &-end {
+        @include alignItems(flex-end);
+    }
+}
+[class*="flex-"],
+[class^="flex"] {
+    &.row {
+        flex-direction: row;
+    }
+
+    &.row-reverse {
+        flex-direction: row-reverse;
+    }
+
+    &.column {
+        flex-direction: column;
+    }
+
+    &.column-reverse {
+        flex-direction: column-reverse;
+    }
+
+    &.wrap {
+        flex-wrap: wrap;
+    }
+
+    &.nowrap {
+        flex-wrap: nowrap;
+    }
+}
 
 .flex1 {
     flex: 1;
@@ -47,102 +117,29 @@ image {
     flex: 4;
 }
 
-[class*="flex-"] {
-    &.column {
-        flex-direction: column;
-    }
-
-    &.reverse {
-        flex-direction: column-reverse;
-    }
-
-    &.wrap {
-        flex-wrap: wrap;
-    }
-
-    &.no-wrap {
-        flex-wrap: nowrap;
-    }
-
-    &.row {
-        flex-direction: row;
-    }
-
-    &.reverse {
-        flex-direction: row-reverse;
-    }
-}
-
-@mixin flexFun($align: center, $justify: center) {
-    display: flex;
-    align-items: $align;
-    justify-content: $justify;
-}
-
-@mixin flexJustify($align) {
-    @include flexFun($align);
-
-    &-start {
-        @include flexFun($align, flex-start);
-    }
-
-    &-end {
-        @include flexFun($align, flex-end);
-    }
-
-    &-between {
-        @include flexFun($align, space-between);
-    }
-
-    &-around {
-        @include flexFun($align, space-around);
-    }
-
-    &-evenly {
-        @include flexFun($align, space-evenly);
-    }
-}
-
-.flex {
-    @include flexFun;
-
-    &-start {
-        @include flexJustify(flex-start);
-    }
-
-    &-end {
-        @include flexJustify(flex-end);
-    }
-
-    &-center {
-        @include flexJustify(center);
-    }
-}
-
-/*-------文字溢出-------*/
-.overT {
-    overflow: hidden;
+/*============================= 文字溢出 =============================*/
+@mixin text-ellipsis-lint($lint: 1) {
     text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.overT1 {
+    white-space: normal;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: $lint;
     overflow: hidden;
 }
 
-.overT2 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-}
+.text-ellipsis {
+    --line: 1;
+    @include text-ellipsis-lint(var(--line));
 
-.overT3 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
+    &-1 {
+        @include text-ellipsis-lint(1);
+    }
+
+    &-2 {
+        @include text-ellipsis-lint(2);
+    }
+
+    &-3 {
+        @include text-ellipsis-lint(3);
+    }
 }
