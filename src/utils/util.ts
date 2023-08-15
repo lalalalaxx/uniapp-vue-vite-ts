@@ -185,13 +185,11 @@ export const debounce = <T extends (...args: any[]) => any>(fn: T, wait: number 
  * @author shenname <shenname@163.com>
  * @license MIT
  * @param { function } fn
- * @param {umber} [wait=1000] wait
+ * @param { number } [wait=1000] wait
  */
 export const throttle = <T extends (...args: any[]) => any>(fn: T, wait: number = 1000) => {
-    let timer: number
+    let timer: number = Date.now()
     return function (this: any, ...args: Parameters<T>) {
-        if (timer) return
-
         if (Date.now() - timer >= wait) {
             fn.apply(this, args)
             timer = Date.now()

@@ -108,6 +108,8 @@ interface LoadDataInt {
 }
 
 export function LoadData({ api, afterLoadData, options }: LoadDataInt) {
+    console.log('options', options)
+
     const data = new LoadDataClass(api, afterLoadData, options)
 
     // 下拉加载

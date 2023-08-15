@@ -51,7 +51,7 @@ export default defineStore(
                         }
                         uni.clearStorageSync()
                         goToPage({
-                            url: '/pages/login/login',
+                            url: 'pages/login/login',
                             mode: 'reLaunch'
                         })
                     }, 2000)

@@ -2,6 +2,7 @@
 // import Header from '@/components/Header/Header.vue'
 import type { userInfoInt } from '@/apis/login/type'
 import useUserStore from '@/store/user'
+import { debounce } from '@/utils/util'
 
 const userStore = useUserStore()
 
@@ -37,7 +38,7 @@ const rules = {
         trigger: ['blur', 'change']
     }
 }
-const login = uni.$util.debounce(() => {
+const login = debounce(() => {
     formRef
         .value!.validate()
         .then(() => {
@@ -49,7 +50,7 @@ const login = uni.$util.debounce(() => {
                     icon: 'none',
                     success: () => {
                         setTimeout(() => {
-                            uni.$util.goToPage({ url: 'pages/index/index' })
+                            uni.goToPage({ url: 'pages/index/index' })
                         }, 2000)
                     }
                 })

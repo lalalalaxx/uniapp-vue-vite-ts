@@ -8,7 +8,9 @@
  * @version: V1.0.0
  */
 import { LoadData } from '@/hooks/useListLoadClass'
+import { ref } from 'vue'
 import { debounce } from '@/utils/util'
+import { toRefs } from 'vue'
 
 type listPropsInt = {
     api: Function

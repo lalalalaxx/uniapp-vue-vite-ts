@@ -24,6 +24,15 @@
                 "enablePullDownRefresh": false,
                 "navigationStyle": "custom"
             }
+        },
+        {
+            "name": "listDemo",
+            "path": "pages/listDemo/listDemo",
+            "style": {
+                "navigationBarTitleText": "首页",
+                "enablePullDownRefresh": false,
+                "navigationStyle": "custom"
+            }
         }
     ],
     "subPackages": [
