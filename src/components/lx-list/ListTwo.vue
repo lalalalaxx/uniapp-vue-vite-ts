@@ -36,6 +36,6 @@ LoadData(afterLoadData, [{ key: 'search', val: '222' }])
     <view v-for="(item, index) in list" :key="index">
         <slot v-bind:item="item"></slot>
     </view>
-    <ListState :is-empty="isEmpty" :is-loading="isLoading" :is-no-data="isNoData"></ListState>
+    <lx-list-state :is-empty="isEmpty" :is-loading="isLoading" :is-no-data="isNoData"></lx-list-state>
 </template>
 <style lang="scss" scoped></style>

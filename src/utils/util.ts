@@ -1,4 +1,51 @@
 /**
+ * 公共跳转方法
+ * @author lxx
+ * @date 2023-08-15 14:17
+ * @param { string } url 跳转路径
+ * @param { "navigateTo" | "redirectTo" | "reLaunch" | "switchTab" } [mode=navigateTo] 跳转模式
+ * @param { object } params 跳转传参
+ * @example
+ * goToPage({ url: 'pages/index/index', mode: 'navigateTo', params: {'id': 1} })
+ * @returns { void }
+ */
+export const goToPage = ({ url, mode = 'navigateTo', params = {} }: goToPageInt): void => {
+    if (!url || url.length === 0) {
+        throw Error('"url" is a required parameter')
+    }
+
+    const urlEncode = (params: any = {}) => {
+        const result = []
+        for (const k in params) {
+            if (!params[k]) continue
+            result.push(k + '=' + params[k])
+        }
+
+        return result.join('&')
+    }
+
+    const queryStr = !isEmpty(params) ? '?' + urlEncode(params) : ''
+    const obj = { url: `/${url}${queryStr}` }
+    console.log('obj', obj)
+    switch (mode) {
+        case 'navigateTo':
+            uni.navigateTo(obj)
+            break
+        case 'redirectTo':
+            uni.redirectTo(obj)
+            break
+        case 'reLaunch':
+            uni.reLaunch(obj)
+            break
+        case 'switchTab':
+            uni.switchTab(obj)
+            break
+        default:
+            throw Error(`${mode} does not exist`)
+    }
+}
+
+/**
  * 判断是否为空对象
  * @author shenname <shenname@163.com>
  * @license MIT
@@ -62,54 +109,6 @@ export const isEmpty = (value: any): boolean => {
  */
 export const useCompRef = <T extends abstract new (...args: any) => any>(_comp: T) => {
     return ref<InstanceType<T>>()
-}
-
-/**
- * 公共跳转方法
- * @author shenname <shenname@163.com>
- * @license MIT
- * @param { object } object 跳转参数
- * @param { string } object.url 跳转路径
- * @param { "navigateTo" | "redirectTo" | "reLaunch" | "switchTab" } [object.mode=navigateTo] 跳转模式
- * @param { object } object.params 跳转传参
- * @example
- * goToPage({ 'pages/index/index', navigateTo, {'id': 1} })
- * @returns { void }
- */
-export const goToPage = ({ url, mode = 'navigateTo', params = {} }: goToPageInt): void => {
-    if (!url || url.length === 0) {
-        throw Error('"url" is a required parameter')
-    }
-
-    const urlEncode = (params: any = {}) => {
-        const result = []
-        for (const k in params) {
-            if (!params[k]) continue
-            result.push(k + '=' + params[k])
-        }
-
-        return result.join('&')
-    }
-
-    const queryStr = !isEmpty(params) ? '?' + urlEncode(params) : ''
-    const obj = { url: `/${url}${queryStr}` }
-
-    switch (mode) {
-        case 'navigateTo':
-            uni.navigateTo(obj)
-            break
-        case 'redirectTo':
-            uni.redirectTo(obj)
-            break
-        case 'reLaunch':
-            uni.reLaunch(obj)
-            break
-        case 'switchTab':
-            uni.switchTab(obj)
-            break
-        default:
-            throw Error(`${mode} navigateTo does not exist`)
-    }
 }
 
 /**

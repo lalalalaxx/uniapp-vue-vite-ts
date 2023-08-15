@@ -40,15 +40,12 @@ class LoadDataClass {
         }
     })
 
-    constructor(apiFunctions: Function, afterLoadData?: Function, options?: any) {
+    constructor(apiFunctions: Function, afterLoadData?: Function, options: any = {}) {
         this.Query = apiFunctions
         this.afterLoadData = afterLoadData
+        console.log('options', options)
         // 存在额外参数拼接
-        if (options) {
-            LoadDataClass.queryParams = { ...LoadDataClass.queryParams, ...options }
-        }
-        // 加载数据
-        this.LoadData()
+        this.setParams(options)
     }
     // 加载数据
     LoadData = async () => {
@@ -64,6 +61,22 @@ class LoadDataClass {
         uni.hideLoading()
         uni.stopPullDownRefresh()
         this.isLoading.value = false
+    }
+    /**
+     * 添加额外参数刷新
+     * @param options: 参数
+     * @param isClear: 是否清空数据 false
+     */
+    setParams = (options: any, isClear: boolean = false) => {
+        if (isClear) {
+            this.queryParamsReset()
+        } else {
+            LoadDataClass.queryParams.page = 1
+        }
+        this.list.value = []
+        LoadDataClass.queryParams = Object.assign(LoadDataClass.queryParams, options)
+        // 加载数据
+        this.LoadData()
     }
     // 加载更多
     LoadMore = () => {
@@ -83,7 +96,7 @@ class LoadDataClass {
      * 刷新
      * @param isClear: 是否清空数据
      */
-    ReLoad = (isClear: boolean = true) => {
+    ReLoad = (isClear: boolean = false) => {
         this.isLoading.value = false
         this.list.value = []
         if (isClear) {
@@ -91,7 +104,6 @@ class LoadDataClass {
         } else {
             LoadDataClass.queryParams.page = 1
         }
-
         this.LoadData()
     }
 }
@@ -108,8 +120,6 @@ interface LoadDataInt {
 }
 
 export function LoadData({ api, afterLoadData, options }: LoadDataInt) {
-    console.log('options', options)
-
     const data = new LoadDataClass(api, afterLoadData, options)
 
     // 下拉加载
@@ -122,6 +132,7 @@ export function LoadData({ api, afterLoadData, options }: LoadDataInt) {
         isLoading: data.isLoading,
         isNoData: data.isNoData,
         isEmpty: data.isEmpty,
-        ReLoad: data.ReLoad
+        ReLoad: data.ReLoad,
+        setParams: data.setParams
     }
 }

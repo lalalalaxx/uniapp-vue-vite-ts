@@ -10,12 +10,13 @@ declare module '*.vue' {
 declare module 'uview-plus'
 
 interface Uni {
+    goToPage({ url, mode = 'navigateTo', params = {} }: goToPageInt): void
     $u: any
-    $util: {
-        goToPage({ url, mode = 'navigateTo', params = {} }: goToPageInt): void
-        formatTime(time: number, format?: string): string
-        debounce<T extends (...args: any[]) => any>(fn: T, wait: number = 1000): (...args: Parameters<T>) => void
-        throttle<T extends (...args: any[]) => any>(fn: T, wait: number = 1000): (...args: Parameters<T>) => void
-        fileUrl(fileName: string, filePath: string = 'images'): string
-    }
+    // $util: {
+    //     goToPage({ url, mode = 'navigateTo', params = {} }: goToPageInt): void
+    //     formatTime(time: number, format?: string): string
+    //     debounce<T extends (...args: any[]) => any>(fn: T, wait: number = 1000): (...args: Parameters<T>) => void
+    //     throttle<T extends (...args: any[]) => any>(fn: T, wait: number = 1000): (...args: Parameters<T>) => void
+    //     fileUrl(fileName: string, filePath: string = 'images'): string
+    // }
 }

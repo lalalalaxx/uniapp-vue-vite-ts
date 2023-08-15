@@ -68,7 +68,7 @@ onReady(() => {
 <template>
     <view class="login">
         <image class="login_bg" src="@/static/bg.jpeg" mode="aspectFill" />
-        <view class="flex column login-content">
+        <view class="flex column login_content">
             <u-form ref="formRef" :model="loginForm" :rules="rules" :label-width="20" style="width: 86%">
                 <u-form-item prop="username" left-icon="account" :border-bottom="false">
                     <u-input v-model="loginForm.username" placeholder="请输入账号" border="none" />
@@ -92,12 +92,12 @@ onReady(() => {
     overflow: hidden;
     position: relative;
 
-    &_bg {
+    .login_bg {
         width: 100%;
         height: 100%;
     }
 
-    &-content {
+    .login_content {
         width: 100%;
         height: 0%;
         box-sizing: border-box;
@@ -146,6 +146,9 @@ onReady(() => {
                 &::placeholder {
                     color: #fff;
                 }
+            }
+            .u-input__content__field-wrapper__field {
+                color: #fff !important;
             }
         }
         :deep(.u-form) {
