@@ -36,13 +36,13 @@ export default defineConfig(({ mode }) => {
                 '@': path.join(__dirname, './src')
             }
         },
-        css: {
-            preprocessorOptions: {
-                scss: {
-                    additionalData: '@import "./src/uni.scss";'
-                }
-            }
-        },
+        // css: {
+        //     preprocessorOptions: {
+        //         scss: {
+        //             additionalData: '@import "./src/uni.scss";'
+        //         }
+        //     }
+        // },
         server: {
             // port: 3000,
             proxy: {

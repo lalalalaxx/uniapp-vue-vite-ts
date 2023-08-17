@@ -110,7 +110,7 @@ onMounted(() => {
                         v-if="goBack"
                         @tap="leftTap"
                     ></image>
-                    <view class="left_txt overT">
+                    <view class="left_txt text-ellipsis">
                         {{ leftTxt }}
                     </view>
                 </view>

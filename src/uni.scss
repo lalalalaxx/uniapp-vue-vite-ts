@@ -6,6 +6,7 @@
 @import 'uview-plus/theme.scss';
 
 /*============================= 文字尺寸 =============================*/
+
 $font-size-20: 20rpx;
 $font-size-22: 22rpx;
 $font-size-24: 24rpx;
@@ -15,6 +16,7 @@ $font-size-30: 30rpx;
 $font-size-32: 32rpx;
 $font-size-34: 34rpx;
 $font-size-36: 36rpx;
+$font-size-38: 38rpx;
 $font-size-40: 40rpx;
 
 image {
@@ -74,6 +76,7 @@ image {
         @include alignItems(flex-end);
     }
 }
+
 [class*="flex-"],
 [class^="flex"] {
     &.row {
@@ -101,45 +104,40 @@ image {
     }
 }
 
-.flex1 {
-    flex: 1;
-}
-
-.flex2 {
-    flex: 2;
-}
-
-.flex3 {
-    flex: 2;
-}
-
-.flex4 {
-    flex: 4;
+// 生成flex1等占位
+@for $i from 1 through 5 {
+    .flex#{$i} {
+        flex: #{$i};
+    }
 }
 
 /*============================= 文字溢出 =============================*/
-@mixin text-ellipsis-lint($lint: 1) {
+
+%text-ellipsis-lint {
     text-overflow: ellipsis;
     white-space: normal;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: $lint;
     overflow: hidden;
 }
 
 .text-ellipsis {
     --line: 1;
-    @include text-ellipsis-lint(var(--line));
+    @extend %text-ellipsis-lint;
+    -webkit-line-clamp: var(--line);
 
     &-1 {
-        @include text-ellipsis-lint(1);
+        @extend %text-ellipsis-lint;
+        -webkit-line-clamp: 1;
     }
 
     &-2 {
-        @include text-ellipsis-lint(2);
+        @extend %text-ellipsis-lint;
+        -webkit-line-clamp: 2;
     }
 
     &-3 {
-        @include text-ellipsis-lint(3);
+        @extend %text-ellipsis-lint;
+        -webkit-line-clamp: 3;
     }
 }
