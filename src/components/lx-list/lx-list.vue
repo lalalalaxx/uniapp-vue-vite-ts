@@ -48,10 +48,12 @@ const inputChange = debounce(() => {
     <view class="search_box" v-if="isNeedSearch">
         <u-search placeholder="请输入搜索内容" v-model="inputTxt" @change="inputChange" :show-action="false"></u-search>
     </view>
+    <!-- <scroll-view scroll-y> -->
     <view v-for="(item, index) in list" :key="index">
         <slot v-bind:item="item" v-bind:index="index"></slot>
     </view>
     <lx-list-state :is-empty="isEmpty" :is-loading="isLoading" :is-no-data="isNoData"></lx-list-state>
+    <!-- </scroll-view> -->
 </template>
 <style lang="scss" scoped>
 .search_box {

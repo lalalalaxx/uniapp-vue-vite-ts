@@ -9,6 +9,15 @@
     },
     "pages": [
         {
+            "name": "index",
+            "path": "pages/index/index",
+            "style": {
+                "navigationBarTitleText": "首页",
+                "enablePullDownRefresh": false,
+                "navigationStyle": "custom"
+            }
+        },
+        {
             "name": "login",
             "path": "pages/login/login",
             "style": {
@@ -18,14 +27,21 @@
             }
         },
         {
-            "name": "index",
-            "path": "pages/index/index",
-            "style": {
-                "navigationBarTitleText": "首页",
-                "enablePullDownRefresh": false,
-                "navigationStyle": "custom"
-            }
+            "path": "components/lx_dialog/lx_dialog",
+            "backgroundColor": "transparent",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"animationDuration": 0,
+				    "animationType": "fade-in",
+				    "background": "transparent",
+				    "popGesture": "none",
+				    "bounce": "none",
+				    "titleNView": false
+				}
+			}
         },
+        
         {
             "name": "listDemo",
             "path": "pages/listDemo/listDemo",
@@ -54,7 +70,6 @@
     "globalStyle": {
         "navigationBarTextStyle": "black",
         "navigationBarTitleText": "uni-app",
-        "navigationBarBackgroundColor": "#F8F8F8",
-        "backgroundColor": "#F8F8F8"
+        "navigationBarBackgroundColor": "#F8F8F8"
     }
 }
