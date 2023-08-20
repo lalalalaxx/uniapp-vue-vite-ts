@@ -4,7 +4,7 @@
  * @fileName: List.vue
  * @params  api : 数据请求的apiFunction
  * @author: lxx
- * @date: 2023-07-28 11:36:23"
+ * @date: 2023-07-28 11:36:23
  * @version: V1.0.0
  */
 import { LoadData } from '@/hooks/useListLoadClass'
@@ -20,23 +20,20 @@ type listPropsInt = {
 }
 
 const props = withDefaults(defineProps<listPropsInt>(), {
-    api: () => {
-        console.log('api')
-    },
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    api: () => {},
     isNeedSearch: true,
-    options: () => {
-        console.log('options')
-    }
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    options: {}
 })
 
 const inputTxt = ref('')
 let { options, api, afterLoadData } = toRefs(props)
 if (props.isNeedSearch) {
-    let obj = { search: inputTxt.value }
-    options.value = { ...obj, ...options }
+    let obj = { type: 2 }
+    options.value = Object.assign(options.value, obj)
 }
-
-let { list, isLoading, isEmpty, isNoData, ReLoad } = LoadData({
+let { list, isLoading, isEmpty, isNoData, setParams } = LoadData({
     api: api.value,
     afterLoadData: afterLoadData?.value,
     options: options.value
@@ -44,7 +41,7 @@ let { list, isLoading, isEmpty, isNoData, ReLoad } = LoadData({
 
 const inputChange = debounce(() => {
     console.log('input change')
-    ReLoad(false)
+    setParams({ search: inputTxt.value })
 })
 </script>
 <template>
@@ -54,7 +51,7 @@ const inputChange = debounce(() => {
     <view v-for="(item, index) in list" :key="index">
         <slot v-bind:item="item" v-bind:index="index"></slot>
     </view>
-    <ListState :is-empty="isEmpty" :is-loading="isLoading" :is-no-data="isNoData"></ListState>
+    <lx-list-state :is-empty="isEmpty" :is-loading="isLoading" :is-no-data="isNoData"></lx-list-state>
 </template>
 <style lang="scss" scoped>
 .search_box {

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import Header from '@/components/Header/Header.vue'
-import List from '@/components/List/List.vue'
 import { demo } from '@/apis/demo'
 
 const afterLoadData = (data: any) => {
@@ -13,10 +11,10 @@ const afterLoadData = (data: any) => {
 
 <template>
     <view>
-        <Header :title="'列表测试页面'"></Header>
-        <List :api="demo" :after-load-data="afterLoadData">
-            <template v-slot="{ item, index }">{{ index }} ---- {{ item.name }}</template>
-        </List>
+        <lx-header :title="'列表测试页面'"></lx-header>
+        <lx-list :api="demo" :after-load-data="afterLoadData">
+            <template v-slot="{ item, index }">{{ index }} ---- {{ item }}</template>
+        </lx-list>
     </view>
 </template>
 

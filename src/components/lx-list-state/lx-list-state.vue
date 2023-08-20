@@ -23,7 +23,7 @@ defineProps({
     // 暂无数据使用
     imgUrl: {
         type: String,
-        default: '../../static/pubImgs/empty.png'
+        default: '../../static/empty.png'
     },
     imgIsShow: {
         type: Boolean,

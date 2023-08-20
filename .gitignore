@@ -25,4 +25,4 @@ yarn-error.log*
 .hbuilderx
 
 package-lock.josn
-pnpm-lock.josn
+pnpm-lock.yaml

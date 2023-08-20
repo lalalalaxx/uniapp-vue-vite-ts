@@ -5,11 +5,8 @@
 /* 颜色变量 */
 @import 'uview-plus/theme.scss';
 
+/*============================= 文字尺寸 =============================*/
 
-/* ----------------------------------- */
-/* -------------单样式----------------- */
-/* ----------------------------------- */
-/* 文字尺寸 */
 $font-size-20: 20rpx;
 $font-size-22: 22rpx;
 $font-size-24: 24rpx;
@@ -19,6 +16,7 @@ $font-size-30: 30rpx;
 $font-size-32: 32rpx;
 $font-size-34: 34rpx;
 $font-size-36: 36rpx;
+$font-size-38: 38rpx;
 $font-size-40: 40rpx;
 
 image {
@@ -26,103 +24,120 @@ image {
     height: 100%;
 }
 
-/* 弹性盒子 */
-.flex {
+/*============================= 弹性盒子 =============================*/
+@mixin displayFlex($align: center, $justify: center) {
     display: flex;
-}
-
-.flexDc {
-    flex-direction: column;
-}
-
-.flex1 {
-    flex: 1;
-}
-
-.flex2 {
-    flex: 2;
-}
-
-.flex3 {
-    flex: 2;
-}
-
-.flex4 {
-    flex: 4;
-}
-
-.text-align-center {
-    text-align: center;
-}
-
-.flex-wrap-nowrap {
     flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: $align;
+    justify-content: $justify;
 }
 
-.flex-wrap-wrap {
-    flex-wrap: wrap;
+@mixin alignItems($align: center) {
+    @include displayFlex($align, center);
+
+    &-start {
+        @include displayFlex($align, flex-start);
+    }
+
+    &-center {
+        @include displayFlex($align, center);
+    }
+
+    &-end {
+        @include displayFlex($align, flex-end);
+    }
+
+    &-between {
+        @include displayFlex($align, space-between);
+    }
+
+    &-around {
+        @include displayFlex($align, space-around);
+    }
+
+    &-evenly {
+        @include displayFlex($align, space-evenly);
+    }
 }
 
-.AI-flex-start {
-    align-items: flex-start;
+.flex {
+    @include displayFlex;
+
+    &-center {
+        @include alignItems(center);
+    }
+
+    &-start {
+        @include alignItems(flex-start);
+    }
+
+    &-end {
+        @include alignItems(flex-end);
+    }
 }
 
-.AI-flex-end {
-    align-items: flex-end;
+[class*="flex-"],
+[class^="flex"] {
+    &.row {
+        flex-direction: row;
+    }
+
+    &.row-reverse {
+        flex-direction: row-reverse;
+    }
+
+    &.column {
+        flex-direction: column;
+    }
+
+    &.column-reverse {
+        flex-direction: column-reverse;
+    }
+
+    &.wrap {
+        flex-wrap: wrap;
+    }
+
+    &.nowrap {
+        flex-wrap: nowrap;
+    }
 }
 
-.AI-center {
-    align-items: center;
+// 生成flex1等占位
+@for $i from 1 through 5 {
+    .flex#{$i} {
+        flex: #{$i};
+    }
 }
 
-.AI-wrap {
-    flex-wrap: wrap;
-}
+/*============================= 文字溢出 =============================*/
 
-.JC-flex-start {
-    justify-content: flex-start;
-}
-
-.JC-flex-end {
-    justify-content: flex-end;
-}
-
-.JC-center {
-    justify-content: center;
-}
-
-.JC-space-between {
-    justify-content: space-between;
-}
-
-.JC-space-around {
-    justify-content: space-around;
-}
-
-/*-------文字溢出-------*/
-.overT {
-    overflow: hidden;
+%text-ellipsis-lint {
     text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.overT1 {
+    white-space: normal;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
     overflow: hidden;
 }
 
-.overT2 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-}
+.text-ellipsis {
+    --line: 1;
+    @extend %text-ellipsis-lint;
+    -webkit-line-clamp: var(--line);
 
-.overT3 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
+    &-1 {
+        @extend %text-ellipsis-lint;
+        -webkit-line-clamp: 1;
+    }
+
+    &-2 {
+        @extend %text-ellipsis-lint;
+        -webkit-line-clamp: 2;
+    }
+
+    &-3 {
+        @extend %text-ellipsis-lint;
+        -webkit-line-clamp: 3;
+    }
 }

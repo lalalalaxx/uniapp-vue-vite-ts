@@ -7,19 +7,15 @@
  * @date: 2023-07-28 11:36:23"
  * @version: V1.0.0
  */
-import ListState from '@/components/ListState/ListState.vue'
 import { usePagingLoad } from '@/hooks/usePagingLoad'
-import { toRefs, ref } from 'vue'
 /*
  * @params api : 数据请求的apiFunction
  * @author: lxx
  */
-type listPropsInt = {
+const props = defineProps<{
     api: Function
-}
-
-const props = withDefaults(defineProps<listPropsInt>(), {})
-const { api } = toRefs(props)
+}>()
+const api = toRef(props, 'api')
 const emit = defineEmits(['afterLoad'])
 
 const { isEmpty, isNoData, isLoading, list, LoadData, ReLoad } = usePagingLoad(api.value)
@@ -40,6 +36,6 @@ LoadData(afterLoadData, [{ key: 'search', val: '222' }])
     <view v-for="(item, index) in list" :key="index">
         <slot v-bind:item="item"></slot>
     </view>
-    <ListState :is-empty="isEmpty" :is-loading="isLoading" :is-no-data="isNoData"></ListState>
+    <lx-list-state :is-empty="isEmpty" :is-loading="isLoading" :is-no-data="isNoData"></lx-list-state>
 </template>
 <style lang="scss" scoped></style>

@@ -1,25 +1,43 @@
 <script setup lang="ts">
-import Header from '@/components/Header/Header.vue'
 import useUserStore from '@/store/user'
-import { goToPage } from '@/utils/util'
 const userStore = useUserStore()
 
+import { throttle, formatTime } from '@/utils/util'
+
+const dialogRef = ref()
 const logout = () => {
     userStore.logOut()
 }
 
+const showDialog = () => {
+    dialogRef.value!.show = true
+}
+
 const goList = () => {
-    goToPage({
-        url: '/pages/listDemo/listDemo'
+    uni.goToPage({
+        url: 'pages/listDemo/listDemo'
     })
 }
+
+const throttles = throttle(() => {
+    console.log('num, age')
+    goList()
+}, 1000)
+
+console.log('xxx', formatTime(Date.now(), 'yyyy-MM-dd'))
 </script>
 <template>
     <view class="index">
-        <Header :title="'首页'" :left-icon-show="false"></Header>
-        这里是首页~
-        <button @click="goList">列表</button>
+        <lx-header :title="'首页'" :left-icon-show="false" />
+
         <button @click="logout">退出</button>
+        <button @tap="showDialog">弹窗</button>
+        <button @tap="throttles">弹窗</button>
+
+        <ex-dialog ref="dialogRef" :show-cancel-button="true">
+            <view>模态框，常用于消息提示、消息确认、在当前页面内完成特定的交互操作</view>
+        </ex-dialog>
+        <lx-empty></lx-empty>
     </view>
 </template>
 
