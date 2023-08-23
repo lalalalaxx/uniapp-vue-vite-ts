@@ -13,7 +13,9 @@ const afterLoadData = (data: any) => {
     <view>
         <lx-header :title="'列表测试页面'"></lx-header>
         <lx-list :api="demo" :after-load-data="afterLoadData">
-            <template v-slot="{ item, index }">{{ index }} ---- {{ item }}</template>
+            <template v-slot="{ item, index }">
+                <view style="height: 25vh">{{ index }} ---- {{ item }}</view>
+            </template>
         </lx-list>
     </view>
 </template>

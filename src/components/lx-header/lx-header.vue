@@ -7,7 +7,6 @@
  * @date: 2023-07-16 09:32:09
  * @version: V1.0.2
  */
-import { goToPage } from '@/utils/util'
 import { ref, watchEffect, type CSSProperties } from 'vue'
 
 type headerInt = {
@@ -81,8 +80,8 @@ const style = computed(() => {
 // 返回上一页(如没有页面返回首页)
 const goBack = () => {
     if (getCurrentPages().length <= 1) {
-        goToPage({
-            url: '/pages/index/index',
+        uni.goToPage({
+            url: 'pages/index/index',
             mode: 'redirectTo'
         })
     } else {

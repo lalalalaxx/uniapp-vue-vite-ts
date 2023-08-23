@@ -9,8 +9,17 @@ const logout = () => {
     userStore.logOut()
 }
 
+const a = ref(11)
+console.log(a)
+
 const showDialog = () => {
-    dialogRef.value!.show = true
+    // dialogRef.value!.show = true
+    // uni.navigateTo({
+    //     url: '/components/dialog/dialog'
+    // })
+    uni.goToPage({
+        url: 'components/lx_dialog/lx_dialog?title=' + '10231123'
+    })
 }
 
 const goList = () => {
@@ -33,7 +42,6 @@ console.log('xxx', formatTime(Date.now(), 'yyyy-MM-dd'))
         <button @click="logout">退出</button>
         <button @tap="showDialog">弹窗</button>
         <button @tap="throttles">弹窗2</button>
-
         <ex-dialog ref="dialogRef" :show-cancel-button="true">
             <view>模态框，常用于消息提示、消息确认、在当前页面内完成特定的交互操作</view>
         </ex-dialog>
